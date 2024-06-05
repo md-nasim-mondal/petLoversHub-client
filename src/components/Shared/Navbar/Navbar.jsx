@@ -7,6 +7,7 @@ import avatarImg from "../../../assets/images/placeholder.jpg";
 import NavItem from "./NavItem";
 import toast from "react-hot-toast";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import logo from "../../../assets/images/petlovershub-high-resolution-logo-transparent.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -68,23 +69,25 @@ const Navbar = () => {
   );
   const menuLinks = (
     <>
-        <>
-          <li>
-            <Link
-              to='/dashboard'
-              className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white'>
-              Dashboard
-            </Link>
-          </li>
-          <li>
+      <>
+        <li>
+          <Link to='/dashboard'>
             <button
-              onClick={handleLogout}
               type='button'
-              className='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>
-              Logout
+              className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 ml-4'>
+              Dashboard
             </button>
-          </li>
-        </>
+          </Link>
+        </li>
+        <li>
+          <button
+            onClick={handleLogout}
+            type='button'
+            className='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ml-4'>
+            Logout
+          </button>
+        </li>
+      </>
     </>
   );
 
@@ -93,18 +96,15 @@ const Navbar = () => {
       <div className='py-4 border-b-[1px]'>
         <Container>
           <nav className='bg-white border-gray-200 dark:bg-gray-900'>
-            <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto md:p-4'>
+            <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto md:p-4 relative'>
               <Link
                 to='/'
                 className='flex items-center space-x-3 rtl:space-x-reverse'>
                 <img
-                  src='https://flowbite.com/docs/images/logo.svg'
-                  className='h-8'
+                  src={logo}
+                  className='h-8 md:h-10 lg:h-12'
                   alt='Flowbite Logo'
                 />
-                <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
-                  PetLoversHub
-                </span>
               </Link>
               <div className='flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse'>
                 <div className='md:mr-4'>
@@ -131,7 +131,7 @@ const Navbar = () => {
                       <div
                         className='z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600'
                         id='user-dropdown'>
-                        <div className='absolute right-10 top-5 mt-4 bg-gray-50 border border-gray-100 rounded-lg dark:bg-gray-900 dark:border-gray-700'>
+                        <div className='absolute right-[1%] top-[98%] mt-4 border-t border-t-gray-200 dark:border-t-gray-200 bg-gray-50 border border-gray-100 rounded-b-lg dark:bg-gray-900 dark:border-gray-700'>
                           <div className='px-4 py-3'>
                             <span className='block text-sm text-gray-900  dark:text-white'>
                               {user?.displayName}

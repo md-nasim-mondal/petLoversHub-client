@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async'
-import Rooms from '../../components/Home/Rooms'
 
 const Home = () => {
   return (
@@ -7,8 +6,6 @@ const Home = () => {
       <Helmet>
         <title>StayVista | Vacation Homes & Condo Rentals</title>
       </Helmet>
-      {/* Rooms section */}
-      <Rooms />
     </div>
   )
 }

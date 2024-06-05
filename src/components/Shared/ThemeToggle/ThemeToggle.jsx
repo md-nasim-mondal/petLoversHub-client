@@ -31,7 +31,7 @@ const ThemeToggle = () => {
     <button
       id='theme-toggle'
       onClick={handleThemeToggle}
-      className='p-2 rounded-full border-4 border-current dark:text-white'>
+      className='p-0.5 rounded-full border-4 border-current dark:text-white'>
       <svg
         id='theme-toggle-dark-icon'
         className={`w-6 h-6 ${isDarkMode ? "hidden" : ""}`}

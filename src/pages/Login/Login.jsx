@@ -1,43 +1,30 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import useAuth from "./../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { imageUpload } from "../../api/utils";
+import { useState } from "react";
 
-const SignUp = () => {
+const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
-  const {
-    createUser,
-    signInWithGoogle,
-    updateUserProfile,
-    loading,
-    setLoading,
-  } = useAuth();
+  const { signIn, signInWithGoogle, loading, setLoading, resetPassword } =
+    useAuth();
+  const [email, setEmail] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    const image = form.image.files[0];
 
     try {
       setLoading(true);
-      // 1. Upload image and get image url
-      const image_url = await imageUpload(image);
-      // console.log(image_url)
-
-      // 2. User Registration
-      await createUser(email, password);
-
-      // 3. Save username and photo in firebase
-      await updateUserProfile(name, image_url);
-
+      // 1. sign In user
+      await signIn(email, password);
       navigate(from);
-      toast.success("SignUp Successful");
+      toast.success("SignIn Successful");
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -45,53 +32,44 @@ const SignUp = () => {
     }
   };
 
-  // handle google signIn
-  const handleGoogleSignIn = async () => {
+  const handleResetPassword = async () => {
+    if (!email) return toast.error("Please write your email first!");
     try {
-      await signInWithGoogle();
-
-      navigate(from);
-      toast.success("LogIn Successful With Google");
+      await resetPassword(email);
+      toast.success(
+        "Request Success! Check your email for further process.........."
+      );
+      setLoading(false);
     } catch (err) {
-      console.log(err);
+      // console.log(err)
       toast.error(err.message);
+      setLoading(false);
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate(from);
+      toast.success("LogIn Successful With Google");
+    } catch (err) {
+      // console.log(err)
+      toast.error(err.message);
+    }
+  };
   return (
     <div className='flex justify-center items-center min-h-screen'>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
-          <h1 className='my-3 text-4xl font-bold'>Sign Up</h1>
-          <p className='text-sm text-gray-400'>Welcome to StayVista</p>
+          <h1 className='my-3 text-4xl font-bold'>Log In</h1>
+          <p className='text-sm text-gray-400'>
+            Sign in to access your account
+          </p>
         </div>
-        <form onSubmit={handleSubmit} className='space-y-6'>
+        <form
+          onSubmit={handleSubmit}
+          className='space-y-6 ng-untouched ng-pristine ng-valid'>
           <div className='space-y-4'>
-            <div>
-              <label htmlFor='email' className='block mb-2 text-sm'>
-                Name
-              </label>
-              <input
-                type='text'
-                name='name'
-                id='name'
-                placeholder='Enter Your Name Here'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
-                data-temp-mail-org='0'
-              />
-            </div>
-            <div>
-              <label htmlFor='image' className='block mb-2 text-sm'>
-                Select Image:
-              </label>
-              <input
-                required
-                type='file'
-                id='image'
-                name='image'
-                accept='image/*'
-              />
-            </div>
             <div>
               <label htmlFor='email' className='block mb-2 text-sm'>
                 Email address
@@ -99,6 +77,7 @@ const SignUp = () => {
               <input
                 type='email'
                 name='email'
+                onBlur={(e) => setEmail(e.target.value)}
                 id='email'
                 required
                 placeholder='Enter Your Email Here'
@@ -115,7 +94,7 @@ const SignUp = () => {
               <input
                 type='password'
                 name='password'
-                autoComplete='new-password'
+                autoComplete='current-password'
                 id='password'
                 required
                 placeholder='*******'
@@ -132,15 +111,22 @@ const SignUp = () => {
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
               ) : (
-                "Continue"
+                "Sign In"
               )}
             </button>
           </div>
         </form>
+        <div className='space-y-1'>
+          <button
+            onClick={handleResetPassword}
+            className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
+            Forgot password?
+          </button>
+        </div>
         <div className='flex items-center pt-4 space-x-1'>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
           <p className='px-3 text-sm dark:text-gray-400'>
-            Signup with social accounts
+            Login with social accounts
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
@@ -153,16 +139,17 @@ const SignUp = () => {
           <p>Continue with Google</p>
         </button>
         <p className='px-6 text-sm text-center text-gray-400'>
-          Already have an account?{" "}
+          Don&apos;t have an account yet?{" "}
           <Link
-            to='/login'
+            to='/signup'
             className='hover:underline hover:text-rose-500 text-gray-600'>
-            Login
+            Sign up
           </Link>
+          .
         </p>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default Login;
