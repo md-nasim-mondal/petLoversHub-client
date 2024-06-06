@@ -7,7 +7,7 @@ import avatarImg from "../../../assets/images/placeholder.jpg";
 import NavItem from "./NavItem";
 import toast from "react-hot-toast";
 import ThemeToggle from "../ThemeToggle/ThemeToggle";
-import logo from "../../../assets/images/petlovershub-high-resolution-logo-transparent.png";
+import logo from "../../../assets/images/petLoversHubLogo.png";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();

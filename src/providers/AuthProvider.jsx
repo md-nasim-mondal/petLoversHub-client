@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import {
+  GithubAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
@@ -17,6 +18,7 @@ import axios from "axios";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
+    const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   // const axiosCommon = useAxiosCommon();
@@ -36,6 +38,11 @@ const AuthProvider = ({ children }) => {
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
+  };
+
+  const signInWithGitHub = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider);
   };
 
   const resetPassword = (email) => {
@@ -68,18 +75,18 @@ const AuthProvider = ({ children }) => {
   };
 
   // save user
-  // const saveUser = async (user) => {
-  //   const currentUser = {
-  //     email: user?.email,
-  //     role: "guest",
-  //     status: "Verified",
-  //   };
-  //   const { data } = await axios.put(
-  //     `${import.meta.env.VITE_API_URL}/user`,
-  //     currentUser
-  //   );
-  //   return data;
-  // };
+  const saveUser = async (user) => {
+    const currentUser = {
+      email: user?.email,
+      role: "guest",
+      status: "Verified",
+    };
+    const { data } = await axios.put(
+      `${import.meta.env.VITE_API_URL}/user`,
+      currentUser
+    );
+    return data;
+  };
 
   // onAuthStateChange
   useEffect(() => {
@@ -87,7 +94,7 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         getToken(currentUser.email);
-        // saveUser(currentUser);
+        saveUser(currentUser);
       }
       setLoading(false);
     });
@@ -104,6 +111,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     signIn,
     signInWithGoogle,
+    signInWithGitHub,
     resetPassword,
     logOut,
     updateUserProfile,

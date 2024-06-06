@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from '../../../assets/images/petlovershub-high-resolution-logo-transparent.png'
+import logo from "../../../assets/images/petLoversHubLogo.png";
 
 const Footer = () => {
   return (
