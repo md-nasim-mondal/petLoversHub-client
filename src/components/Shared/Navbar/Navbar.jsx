@@ -1,6 +1,6 @@
 import Container from "../Container";
 // import { AiOutlineMenu } from "react-icons/ai";
-import { useState } from "react";
+// import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import avatarImg from "../../../assets/images/placeholder.jpg";
@@ -10,10 +10,14 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import logo from "../../../assets/images/petLoversHubLogo.png";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
-  // const [isOpen, setIsOpen] = useState(false)
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
+  const {
+    user,
+    logOut,
+    dropdownVisible,
+    setDropdownVisible,
+    menuVisible,
+    setMenuVisible,
+  } = useAuth();
 
   const toggleDropdown = () => {
     setMenuVisible(false);
@@ -68,7 +72,6 @@ const Navbar = () => {
     </>
   );
   const menuLinks = (
-    <>
       <>
         <li>
           <Link to='/dashboard'>
@@ -88,7 +91,6 @@ const Navbar = () => {
           </button>
         </li>
       </>
-    </>
   );
 
   return (

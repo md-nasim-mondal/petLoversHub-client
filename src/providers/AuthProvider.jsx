@@ -24,6 +24,8 @@ const AuthProvider = ({ children }) => {
   // const axiosCommon = useAxiosCommon();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -77,7 +79,9 @@ const AuthProvider = ({ children }) => {
   // save user
   const saveUser = async (user) => {
     const currentUser = {
+      name: user?.displayName,
       email: user?.email,
+      photo: user?.photoURL,
       role: "guest",
       status: "Verified",
     };
@@ -115,6 +119,10 @@ const AuthProvider = ({ children }) => {
     resetPassword,
     logOut,
     updateUserProfile,
+    dropdownVisible,
+    setDropdownVisible,
+    menuVisible,
+    setMenuVisible,
   };
 
   return (
