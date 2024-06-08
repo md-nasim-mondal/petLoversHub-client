@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
-import { BsGraphUp } from "react-icons/bs";
 import { FcSettings } from "react-icons/fc";
 import { RiMenuUnfold4Fill } from "react-icons/ri";
+import { MdDashboard } from "react-icons/md";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import MenuItem from "./Menu/MenuItem";
@@ -28,11 +28,13 @@ const Sidebar = () => {
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
   };
-  if(isLoading) return <LoadingSpinner/>
+  if (isLoading) return <LoadingSpinner />;
   return (
     <div className='text-center'>
       <button
-        className=' absolute left-0  hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+        className={`absolute left-0 hover:bg-slate-400 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm mx-4 my-2 p-1 dark:hover:bg-slate-400 focus:outline-none dark:focus:ring-blue-800 ${
+          isDrawerOpen && "hidden"
+        }`}
         type='button'
         onClick={toggleDrawer}>
         <RiMenuUnfold4Fill className='text-3xl bg-gray-100 rounded-sm p-0.5' />
@@ -46,7 +48,7 @@ const Sidebar = () => {
         tabIndex='-1'
         aria-labelledby='drawer-navigation-label'>
         <div
-          className={`z-10 md:fixed flex flex-col justify-between overflow-y-auto overflow-x-hidden bg-gray-100 dark:bg-gray-800 w-80 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform  transition duration-200 ease-in-out`}>
+          className={`z-10 md:fixed flex flex-col justify-between overflow-y-auto overflow-x-hidden bg-gray-100 dark:bg-gray-600 w-80 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform  transition duration-200 ease-in-out`}>
           <div className=' absolute top-0 end-2.5 inline-flex'>
             <div className='mr-56 py-3'>
               <ThemeToggle />
@@ -93,9 +95,9 @@ const Sidebar = () => {
               <nav>
                 {/* Statistics */}
                 <MenuItem
-                  label={"Statistics"}
+                  label={"Dashboard"}
                   address={"/dashboard"}
-                  icon={BsGraphUp}
+                  icon={MdDashboard}
                 />
 
                 {role === "user" && <UserMenu />}

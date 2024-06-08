@@ -13,32 +13,32 @@ const UserMenu = () => {
       <MenuItem
         icon={MdOutlineAddToPhotos}
         label='Add A Pet'
-        address='add-pet'
+        address='/dashboard/add-pet'
       />
       <MenuItem
         icon={MdPlaylistAddCheckCircle}
         label='My Added Pets'
-        address='my-added-pets'
+        address='/dashboard/my-added-pets'
       />
       <MenuItem
         icon={VscGitPullRequestNewChanges}
         label='Adoption Request'
-        address='adoption-request'
+        address='/dashboard/adoption-request'
       />
       <MenuItem
         icon={MdCreateNewFolder}
         label='Create Donation Campaign'
-        address='create-donation-campaign'
+        address='/dashboard/create-donation-campaign'
       />
       <MenuItem
         icon={FaDonate}
         label='My Donation Campaigns'
-        address='my-donation-campaigns'
+        address='/dashboard/my-donation-campaigns'
       />
       <MenuItem
         icon={FcDonate}
         label='My Donations'
-        address='my-donations'
+        address='/dashboard/my-donations'
       />
     </>
   );

@@ -8,6 +8,17 @@ import PetListings from "../pages/PetListings/PetListings";
 import DonationCampaigns from "../pages/DonationCampaigns/DonationCampaigns";
 import Contact from "../pages/Contact/Contact";
 import DashboardLayout from "../layouts/DashboardLayout";
+import AddAPet from "../pages/Dashboard/User/AddAPet/AddAPet";
+import MyAddedPets from "../pages/Dashboard/User/MyAddedPets/MyAddedPets";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import AdoptionRequest from "../pages/Dashboard/User/AdoptionRequest/AdoptionRequest";
+import CreateDonationCampaign from "../pages/Dashboard/User/CreateDonationCampaign/CreateDonationCampaign";
+import MyDonationCampaigns from "../pages/Dashboard/User/MyDonationCampaigns/MyDonationCampaigns";
+import MyDonations from "../pages/Dashboard/User/MyDonations/MyDonations";
+import Users from "../pages/Dashboard/Admin/Users/Users";
+import AllDonations from "../pages/Dashboard/Admin/AllDonations/AllDonations";
+import AllPets from "../pages/Dashboard/Admin/AllPets/AllPets";
+import Profile from "../pages/Dashboard/ForAllUser/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -20,7 +31,7 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/pet-listing",
+        path: "/profile",
         element: <PetListings />,
       },
       {
@@ -42,10 +53,56 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <DashboardLayout />,
     children: [
-      
-    ]
-  }
+      // for All
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      // user dashboard routes
+      {
+        path: "add-pet",
+        element: <AddAPet />,
+      },
+      {
+        path: "my-add-pets",
+        element: <MyAddedPets />,
+      },
+      {
+        path: "adoption-request",
+        element: <AdoptionRequest />,
+      },
+      {
+        path: "create-donation-campaign",
+        element: <CreateDonationCampaign />,
+      },
+      {
+        path: "my-donation-campaigns",
+        element: <MyDonationCampaigns />,
+      },
+      {
+        path: "my-donations",
+        element: <MyDonations />,
+      },
+      // Admin Routes
+      {
+        path: "users",
+        element: <Users />,
+      },
+      {
+        path: "all-pets",
+        element: <AllPets />,
+      },
+      {
+        path: "all-donations",
+        element: <AllDonations />,
+      },
+    ],
+  },
 ]);
