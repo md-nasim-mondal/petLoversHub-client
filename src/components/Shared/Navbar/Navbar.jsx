@@ -1,6 +1,4 @@
 import Container from "../Container";
-// import { AiOutlineMenu } from "react-icons/ai";
-// import { useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import avatarImg from "../../../assets/images/placeholder.jpg";
@@ -45,12 +43,12 @@ const Navbar = () => {
         setDropdownVisible={setDropdownVisible}
       />
       <NavItem
-        address='/pets'
+        address='/pet-listing'
         label='Pet Listing'
         setDropdownVisible={setDropdownVisible}
       />
       <NavItem
-        address='/donations'
+        address='/donation-campaigns'
         label='Donation Campaigns'
         setDropdownVisible={setDropdownVisible}
       />
@@ -72,25 +70,25 @@ const Navbar = () => {
     </>
   );
   const menuLinks = (
-      <>
-        <li>
-          <Link to='/dashboard'>
-            <button
-              type='button'
-              className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 ml-4'>
-              Dashboard
-            </button>
-          </Link>
-        </li>
-        <li>
+    <>
+      <li>
+        <Link to='/dashboard'>
           <button
-            onClick={handleLogout}
             type='button'
-            className='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ml-4'>
-            Logout
+            className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 ml-4'>
+            Dashboard
           </button>
-        </li>
-      </>
+        </Link>
+      </li>
+      <li>
+        <button
+          onClick={handleLogout}
+          type='button'
+          className='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ml-4'>
+          Logout
+        </button>
+      </li>
+    </>
   );
 
   return (
@@ -108,11 +106,7 @@ const Navbar = () => {
                   alt='Flowbite Logo'
                 />
               </Link>
-              <div className='flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse'>
-                <div className='md:mr-4'>
-                  <ThemeToggle />
-                </div>
-
+              <div className='flex items-center md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse'>
                 {user ? (
                   <>
                     <button
@@ -162,13 +156,13 @@ const Navbar = () => {
                 <button
                   data-collapse-toggle='navbar-user'
                   type='button'
-                  className='inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
+                  className='inline-flex items-center md:p-2 md:w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600'
                   aria-controls='navbar-user'
                   aria-expanded={menuVisible}
                   onClick={toggleMenu}>
                   <span className='sr-only'>Open main menu</span>
                   <svg
-                    className='w-5 h-5'
+                    className='w-5 h-5 mx-auto'
                     aria-hidden='true'
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
@@ -182,6 +176,9 @@ const Navbar = () => {
                     />
                   </svg>
                 </button>
+                <div className='md:pl-4'>
+                  <ThemeToggle />
+                </div>
               </div>
               <div
                 className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${
