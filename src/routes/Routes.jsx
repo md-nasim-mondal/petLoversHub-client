@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
         element: <AddAPet />,
       },
       {
-        path: "my-add-pets",
+        path: "my-added-pets",
         element: <MyAddedPets />,
       },
       {

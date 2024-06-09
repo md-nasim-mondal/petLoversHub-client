@@ -14,14 +14,12 @@ import {
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
-// import useAxiosCommon from "../hooks/useAxiosCommon";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-    const githubProvider = new GithubAuthProvider();
+const githubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
-  // const axiosCommon = useAxiosCommon();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [dropdownVisible, setDropdownVisible] = useState(false);

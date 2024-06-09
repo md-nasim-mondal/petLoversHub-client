@@ -13,10 +13,10 @@ import UserMenu from "./Menu/UserMenu";
 import ToggleBtn from "../../Shared/Button/ToggleBtn";
 import AdminMenu from "./Menu/AdminMenu";
 import LoadingSpinner from "./../../Shared/LoadingSpinner";
+import PropTypes from "prop-types";
 
-const Sidebar = () => {
+const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
   const { logOut } = useAuth();
-  const [isDrawerOpen, setDrawerOpen] = useState(true);
   const [toggle, setToggle] = useState(false);
   const [role, isLoading] = useRole();
   // console.log(role, isLoading);
@@ -42,7 +42,7 @@ const Sidebar = () => {
 
       <div
         id='drawer-navigation'
-        className={`fixed top-0 left-0 z-40 w-80 h-screen p-4 overflow-y-auto transition-transform ${
+        className={`fixed top-0 left-0 z-40 w-80 h-[135vh] md:h-screen p-4 overflow-y-auto transition-transform ${
           isDrawerOpen ? "translate-x-0" : "-translate-x-full"
         } bg-white dark:bg-gray-800`}
         tabIndex='-1'
@@ -133,6 +133,11 @@ const Sidebar = () => {
       </div>
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  isDrawerOpen: PropTypes.bool,
+  setDrawerOpen: PropTypes.func
 };
 
 export default Sidebar;
