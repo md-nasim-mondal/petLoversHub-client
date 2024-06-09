@@ -19,7 +19,6 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
   const { logOut } = useAuth();
   const [toggle, setToggle] = useState(false);
   const [role, isLoading] = useRole();
-  // console.log(role, isLoading);
 
   const toggleHandler = () => {
     setToggle(!toggle);
@@ -50,7 +49,7 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
         <div
           className={`z-10 md:fixed flex flex-col justify-between overflow-y-auto overflow-x-hidden bg-gray-100 dark:bg-gray-600 w-80 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform  transition duration-200 ease-in-out`}>
           <div className=' absolute top-0 end-2.5 inline-flex'>
-            <div className='mr-56 py-3'>
+            <div className='mr-52 py-3'>
               <ThemeToggle />
             </div>
             <div className='flex items-center'>
@@ -93,7 +92,7 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
 
               {/*  Menu Items */}
               <nav>
-                {/* Statistics */}
+                {/* Simple Dashboard */}
                 <MenuItem
                   label={"Dashboard"}
                   address={"/dashboard"}
