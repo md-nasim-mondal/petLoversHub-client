@@ -19,6 +19,7 @@ import Users from "../pages/Dashboard/Admin/Users/Users";
 import AllDonations from "../pages/Dashboard/Admin/AllDonations/AllDonations";
 import AllPets from "../pages/Dashboard/Admin/AllPets/AllPets";
 import Profile from "../pages/Dashboard/ForAllUser/Profile/Profile";
+import UpdatePet from "../pages/Dashboard/User/UpdatePet/UpdatePet";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
       {
         path: "my-added-pets",
         element: <MyAddedPets />,
+      },
+      {
+        path: "update-pet/:id",
+        element: <UpdatePet />,
       },
       {
         path: "adoption-request",
