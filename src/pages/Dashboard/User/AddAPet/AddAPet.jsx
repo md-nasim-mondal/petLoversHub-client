@@ -77,7 +77,7 @@ const AddAPet = () => {
         longDescription,
         presentOwner,
         adopted: false,
-        dateAdded: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
       };
 
       console.log(petData);

@@ -7,17 +7,12 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
-  const {
-    signIn,
-    signInWithGoogle,
-    signInWithGitHub,
-    loading,
-    setLoading,
-    resetPassword,
-  } = useAuth();
+  const { signIn, signInWithGoogle, signInWithGitHub, resetPassword } =
+    useAuth();
   const [email, setEmail] = useState("");
 
   const handleSubmit = async (e) => {
@@ -32,8 +27,8 @@ const Login = () => {
       await signIn(email, password);
       navigate(from);
       toast.success("SignIn Successful");
+      setLoading(false);
     } catch (err) {
-      console.log(err);
       toast.error(err.message);
       setLoading(false);
     }
@@ -45,13 +40,13 @@ const Login = () => {
         "Please write your email first in the email input field!!"
       );
     try {
+      setLoading(true)
       await resetPassword(email);
       toast.success(
         "Request Success! Check your email for further process.........."
       );
       setLoading(false);
     } catch (err) {
-      // console.log(err)
       toast.error(err.message);
       setLoading(false);
     }
@@ -59,12 +54,14 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
+      setLoading(true)
       await signInWithGoogle();
       navigate(from);
       toast.success("LogIn Successful With Google");
+      setLoading(false)
     } catch (err) {
-      // console.log(err)
       toast.error(err.message);
+      setLoading(false)
     }
   };
 
@@ -73,9 +70,9 @@ const Login = () => {
     try {
       setLoading(true);
       await signInWithGitHub();
-
       navigate(from);
       toast.success("LogIn Successful With Github!!");
+      setLoading(false)
     } catch (err) {
       // console.log(err);
       toast.error(err.message);

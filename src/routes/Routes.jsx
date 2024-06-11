@@ -4,7 +4,7 @@ import Home from "../pages/Home/Home";
 import ErrorPage from "../pages/ErrorPage";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
-import PetListings from "../pages/PetListings/PetListings";
+import PetListing from "../pages/PetListing/PetListing";
 import DonationCampaigns from "../pages/DonationCampaigns/DonationCampaigns";
 import Contact from "../pages/Contact/Contact";
 import DashboardLayout from "../layouts/DashboardLayout";
@@ -22,18 +22,20 @@ import Profile from "../pages/Dashboard/ForAllUser/Profile/Profile";
 import UpdatePet from "../pages/Dashboard/User/UpdatePet/UpdatePet";
 
 export const router = createBrowserRouter([
+  //? Main LayOut 
   {
     path: "/",
     element: <Main />,
     errorElement: <ErrorPage />,
     children: [
+    //? navItems Link routes 
       {
         path: "/",
         element: <Home />,
       },
       {
-        path: "/profile",
-        element: <PetListings />,
+        path: "/pet-listing",
+        element: <PetListing />,
       },
       {
         path: "/donation-campaigns",
@@ -53,11 +55,12 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  //? Dashboard Layout
   {
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
-      // for All
+      //? for All Users
       {
         index: true,
         element: <Dashboard />,
@@ -66,7 +69,7 @@ export const router = createBrowserRouter([
         path: "profile",
         element: <Profile />,
       },
-      // user dashboard routes
+      //? user dashboard routes
       {
         path: "add-pet",
         element: <AddAPet />,
@@ -95,7 +98,7 @@ export const router = createBrowserRouter([
         path: "my-donations",
         element: <MyDonations />,
       },
-      // Admin Routes
+      //? Admin Dashboard Routes
       {
         path: "users",
         element: <Users />,
