@@ -12,11 +12,15 @@ import useAuth from "../../../../hooks/useAuth";
 import { imageUpload } from "../../../../api/utils";
 
 const petCategories = [
-  { value: "Dog", label: "Dog" },
   { value: "Cat", label: "Cat" },
   { value: "Bird", label: "Bird" },
+  { value: "Rabbit", label: "Rabbit" },
+  { value: "Dog", label: "Dog" },
+  { value: "Fish", label: "Fish" },
   { value: "Other", label: "Other" },
 ];
+
+
 
 const AddAPet = () => {
   const { user } = useAuth();
@@ -79,8 +83,6 @@ const AddAPet = () => {
         adopted: false,
         createdAt: new Date().toISOString(),
       };
-
-      console.log(petData);
 
       await mutateAsync(petData);
     } catch (error) {

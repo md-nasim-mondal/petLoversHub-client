@@ -124,7 +124,7 @@ const MyAddedPets = () => {
         header: "Category",
       },
       {
-        accessorKey: "status",
+        accessorKey: "adopted",
         header: "Status",
         cell: ({ row }) => (row?.original?.adopted ? "Adopted" : "Available"),
       },
