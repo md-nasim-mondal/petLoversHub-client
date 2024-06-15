@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GrLogout } from "react-icons/gr";
 import { FcSettings } from "react-icons/fc";
 import { RiMenuUnfold4Fill } from "react-icons/ri";
@@ -10,15 +10,23 @@ import logo from "../../../assets/images/petLoversHubLogo.png";
 import ThemeToggle from "../../Shared/ThemeToggle/ThemeToggle";
 import useRole from "../../../hooks/useRole";
 import UserMenu from "./Menu/UserMenu";
-import ToggleBtn from "../../Shared/Button/ToggleBtn";
 import AdminMenu from "./Menu/AdminMenu";
-import LoadingSpinner from "./../../Shared/LoadingSpinner";
+import ToggleBtn from "../../Shared/Button/ToggleBtn";
 import PropTypes from "prop-types";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
-  const { logOut } = useAuth();
-  const [toggle, setToggle] = useState(false);
+  const { logOut, loading } = useAuth();
+  const [toggle, setToggle] = useState(() => {
+    const savedToggleState = localStorage.getItem("sidebarToggle");
+    return savedToggleState ? JSON.parse(savedToggleState) : false;
+  });
   const [role, isLoading] = useRole();
+
+  useEffect(() => {
+    localStorage.setItem("sidebarToggle", JSON.stringify(toggle));
+  }, [toggle]);
 
   const toggleHandler = () => {
     setToggle(!toggle);
@@ -27,7 +35,17 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
   const toggleDrawer = () => {
     setDrawerOpen(!isDrawerOpen);
   };
-  if (isLoading) return <LoadingSpinner />;
+
+  const renderSkeletons = (count) => {
+    return Array.from({ length: count }).map((_, index) => (
+      <div key={index} className='my-4'>
+        <Skeleton height={40} />
+      </div>
+    ));
+  };
+
+  const isContentLoading = loading || isLoading;
+
   return (
     <div className='text-center'>
       <button
@@ -56,30 +74,22 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
               <button
                 type='button'
                 aria-controls='drawer-navigation'
-                className='text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 h-8 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white '
+                className='text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 md:px-3 h-8 inline-flex items-center dark:hover:bg-gray-900 dark:text-white '
                 onClick={toggleDrawer}>
-                <svg
-                  aria-hidden='true'
-                  className='w-6 h-6 text-black dark:text-white'
-                  fill='currentColor'
-                  viewBox='0 0 20 20'
-                  xmlns='http://www.w3.org/2000/svg'>
-                  <path
-                    fillRule='evenodd'
-                    d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-                <span className='sr-only'>Close menu</span>
+                X<span className='sr-only'>Close menu</span>
               </button>
             </div>
           </div>
           <div>
             <div>
               <div className='w-full flex px-4 py-2 mt-5 shadow-lg rounded-lg justify-center items-center bg-blue-200 dark:bg-blue-200 mx-auto'>
-                <Link to='/'>
-                  <img src={logo} alt='logo' />
-                </Link>
+                {isContentLoading ? (
+                  <Skeleton height={64} width={128} />
+                ) : (
+                  <Link to='/'>
+                    <img src={logo} alt='logo' />
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -93,20 +103,22 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
               {/*  Menu Items */}
               <nav>
                 {/* Simple Dashboard */}
-                <MenuItem
-                  label={"Dashboard"}
-                  address={"/dashboard"}
-                  icon={MdDashboard}
-                />
+                {isContentLoading ? (
+                  renderSkeletons(1)
+                ) : (
+                  <MenuItem
+                    label={"Dashboard"}
+                    address={"/dashboard"}
+                    icon={MdDashboard}
+                  />
+                )}
 
-                {role === "user" && <UserMenu />}
-                {role === "admin" ? (
-                  toggle ? (
-                    <UserMenu />
-                  ) : (
-                    <AdminMenu />
-                  )
-                ) : undefined}
+                {role === "user" && !isContentLoading && <UserMenu />}
+                {role === "admin"
+                  ? toggle
+                    ? !isContentLoading && <UserMenu />
+                    : !isContentLoading && <AdminMenu />
+                  : undefined}
               </nav>
             </div>
           </div>
@@ -115,11 +127,15 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
             <hr />
 
             {/* Profile Menu */}
-            <MenuItem
-              label={"Profile"}
-              address={"/dashboard/profile"}
-              icon={FcSettings}
-            />
+            {isContentLoading ? (
+              renderSkeletons(1)
+            ) : (
+              <MenuItem
+                label={"Profile"}
+                address={"/dashboard/profile"}
+                icon={FcSettings}
+              />
+            )}
 
             <button
               onClick={logOut}
@@ -136,7 +152,7 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
 
 Sidebar.propTypes = {
   isDrawerOpen: PropTypes.bool,
-  setDrawerOpen: PropTypes.func
+  setDrawerOpen: PropTypes.func,
 };
 
 export default Sidebar;

@@ -3,7 +3,7 @@ import Sidebar from "../components/Dashboard/Sidebar/Sidebar";
 import { useState } from "react";
 
 const DashboardLayout = () => {
-  const [isDrawerOpen, setDrawerOpen] = useState(true);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
   return (
     <div className='relative min-h-screen md:flex bg-white dark:bg-gray-800'>
       {/* Sidebar */}

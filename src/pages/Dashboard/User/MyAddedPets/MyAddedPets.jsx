@@ -12,12 +12,18 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const MyAddedPets = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: pets = [], refetch } = useQuery({
+  const {
+    data: pets = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["pets", user?.email],
     enabled: !loading && !!user?.email,
     queryFn: async () => {
@@ -43,15 +49,14 @@ const MyAddedPets = () => {
   // Handle Adopted
   const { mutateAsync: makeAdopted } = useMutation({
     mutationFn: async (id) => {
-      const { data } = await axiosSecure.patch(`/pet/${id}`,{adopted: true});
+      const { data } = await axiosSecure.patch(`/pet/${id}`, { adopted: true });
       return data;
     },
     onSuccess: () => {
       refetch();
-      toast.success("Successfully Change Adopted Status true!");
+      toast.success("Successfully Changed Adopted Status to true!");
     },
   });
-
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -62,7 +67,7 @@ const MyAddedPets = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then(async(result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           await mutateAsync(id);
@@ -134,8 +139,7 @@ const MyAddedPets = () => {
         cell: ({ row }) => (
           <div className='space-x-2 flex pl-4 justify-center'>
             <Link to={`/dashboard/update-pet/${row?.original?._id}`}>
-              <button
-                className='bg-blue-500 text-white px-2 py-1 rounded'>
+              <button className='bg-blue-500 text-white px-2 py-1 rounded'>
                 Update
               </button>
             </Link>
@@ -200,12 +204,57 @@ const MyAddedPets = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  const renderSkeletons = (count) => {
+    const skeletonArray = Array.from({ length: count });
+    return skeletonArray.map((_, index) => (
+      <tr key={index} className=' flex items-center border border-gray-300'>
+        <td className='text-center'>
+          <Skeleton width={50} />
+        </td>
+        <td className='text-center'>
+          <Skeleton circle={true} height={64} width={64} />
+        </td>
+        <td className='text-center'>
+          <Skeleton width={100} />
+        </td>
+        <td className='text-center'>
+          <Skeleton width={100} />
+        </td>
+        <td className='text-center'>
+          <Skeleton width={100} />
+        </td>
+        <td className='text-center'>
+          <Skeleton width={200} />
+        </td>
+      </tr>
+    ));
+  };
+
+  if (!pets.length) {
+    return (
+      <h1 className='text-3xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
+        {isLoading || loading ? (
+          <div className="flex flex-col justify-center items-center gap-10">
+            <Skeleton width={300} />
+            {renderSkeletons(pageSize)}
+          </div>
+        ) : (
+          `You haven't any added any pet.`
+        )}
+      </h1>
+    );
+  }
+
   return (
     <div className='mx-auto p-4 overflow-x-auto'>
-      <h1 className='text-3xl md:text-4xl font-bold my-6 md:my-12 text-center'>
-        List Of Pets Added by {user?.displayName}
+      <h1 className='text-3xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
+        {isLoading || loading ? (
+          <Skeleton width={300} />
+        ) : (
+          `List Of Pets (Added by ${user?.displayName})`
+        )}
       </h1>
-      <table className='min-w-full bg-white border border-gray-300'>
+      <table className='min-w-full bg-white dark:bg-transparent dark:text-white border border-gray-300'>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr
@@ -218,14 +267,21 @@ const MyAddedPets = () => {
                   className='p-4 text-center text-sm font-medium text-gray-700'>
                   {header.isPlaceholder ? null : (
                     <div>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
+                      {isLoading || loading ? (
+                        <Skeleton
+                          width={header.column.columnDef.header.length * 10}
+                        />
+                      ) : (
+                        flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )
                       )}
                       {
-                        { asc: "🔼", desc: "🔽" }[
-                          header.column.getIsSorted() ?? null
-                        ]
+                        {
+                          asc: "🔼",
+                          desc: "🔽",
+                        }[header.column.getIsSorted() ?? null]
                       }
                     </div>
                   )}
@@ -235,15 +291,20 @@ const MyAddedPets = () => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row, index) => (
-            <tr key={index} className='border-b border-gray-300'>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className='text-center'>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+          {isLoading || loading
+            ? renderSkeletons(pageSize)
+            : table.getRowModel().rows.map((row, index) => (
+                <tr key={index} className='border-b border-gray-300'>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id} className='text-center'>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
         </tbody>
       </table>
       {table.getPageCount() > 1 && (
@@ -254,12 +315,14 @@ const MyAddedPets = () => {
             disabled={!table.getCanPreviousPage()}>
             Previous
           </button>
-          <span className='text-sm text-gray-700'>
+          <span className='text-sm text-gray-700 dark:text-white'>
             Page {table.getState().pagination.pageIndex + 1} of{" "}
             {table.getPageCount()}
           </span>
           <button
-            className='px-4 py-2 bg-gray-200 text-gray-700 rounded'
+            className={`px-4 py-2 bg-gray-200 text-gray-700 rounded ${
+              table.getCanNextPage() && "bg-blue-400"
+            }`}
             onClick={() => table.setPageIndex(pageIndex + 1)}
             disabled={!table.getCanNextPage()}>
             Next
