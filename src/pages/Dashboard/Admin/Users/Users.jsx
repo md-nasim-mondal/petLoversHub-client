@@ -72,7 +72,7 @@ const Users = () => {
       <Helmet>
         <title>PetLoversHub || Users</title>
       </Helmet>
-      <h3 className='text-3xl md:text-5xl text-center font-bold dark:text-white'>
+      <h3 className='text-2xl md:text-3xl text-center font-bold dark:text-white'>
         List All Users of PetLoversHub
       </h3>
       <div className='py-8'>

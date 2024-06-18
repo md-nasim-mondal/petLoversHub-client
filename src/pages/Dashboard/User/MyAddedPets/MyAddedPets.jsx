@@ -1,11 +1,4 @@
-import { useMemo, useState } from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  getPaginationRowModel,
-  flexRender,
-  getSortedRowModel,
-} from "@tanstack/react-table";
+import { useMemo} from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -14,6 +7,7 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import TanStackTable from "../../../../components/Dashboard/Table/TanStackTable";
 
 const MyAddedPets = () => {
   const { user, loading } = useAuth();
@@ -98,111 +92,70 @@ const MyAddedPets = () => {
     });
   };
 
-  const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
-  const [sorting, setSorting] = useState([]);
+const data = useMemo(() => pets, [pets]);
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: "index",
-        header: "S/N",
-        cell: (info) => info.row.original.index + 1,
-      },
-      {
-        accessorKey: "petImage",
-        header: "Image",
-        cell: ({ getValue }) => (
-          <img
-            src={getValue()}
-            alt='Pet'
-            className='w-16 h-16 object-cover rounded-md mx-auto'
-          />
-        ),
-      },
-      {
-        accessorKey: "petName",
-        header: "Name",
-      },
-      {
-        accessorKey: "petCategory",
-        header: "Category",
-      },
-      {
-        accessorKey: "adopted",
-        header: "Status",
-        cell: ({ row }) => (row?.original?.adopted ? "Adopted" : "Available"),
-      },
-      {
-        accessorKey: "action",
-        header: "Action",
-        cell: ({ row }) => (
-          <div className='space-x-2 flex pl-4 justify-center'>
-            <Link to={`/dashboard/update-pet/${row?.original?._id}`}>
-              <button className='bg-blue-500 text-white px-2 py-1 rounded'>
-                Update
-              </button>
-            </Link>
-            <button
-              onClick={() => handleDelete(row?.original?._id)}
-              className='bg-red-500 text-white px-2 py-1 rounded'>
-              Delete
-            </button>
-            {row?.original?.adopted ? (
-              <button
-                disabled={true}
-                className='bg-emerald-950 text-white px-2 py-1 rounded'>
-                Already Adopted
-              </button>
-            ) : (
-              <button
-                onClick={() => handleAdopted(row?.original?._id)}
-                className='bg-green-500 text-white px-2 py-1 rounded'>
-                Adopt
-              </button>
-            )}
-          </div>
-        ),
-      },
-    ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
-  const paginatedData = useMemo(() => {
-    const start = pageIndex * pageSize;
-    const end = start + pageSize;
-    return pets.slice(start, end).map((pet, index) => ({
-      ...pet,
-      index: start + index,
-    }));
-  }, [pets, pageIndex, pageSize]);
-
-  const table = useReactTable({
-    data: paginatedData,
-    columns,
-    pageCount: Math.ceil(pets.length / pageSize),
-    state: {
-      pagination: {
-        pageIndex,
-        pageSize,
-      },
-      sorting: sorting,
-    },
-    onSortingChange: setSorting,
-    onPaginationChange: (updater) => {
-      const newState =
-        typeof updater === "function"
-          ? updater({ pageIndex, pageSize })
-          : updater;
-      setPageIndex(newState.pageIndex);
-      setPageSize(newState.pageSize);
-    },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    manualPagination: true,
-    getSortedRowModel: getSortedRowModel(),
-  });
+const columns = [
+  {
+    accessorKey: "_id",
+    header: "S/N",
+    cell: ({ row }) => row?.index + 1,
+  },
+  {
+    header: "Pet Name",
+    accessorKey: "petName",
+  },
+  {
+    header: "Category",
+    accessorKey: "petCategory",
+  },
+  {
+    header: "Image",
+    accessorKey: "petImage",
+    cell: ({ getValue }) => (
+      <img
+        src={getValue()}
+        alt='Pet'
+        className='w-16 h-16 object-cover rounded-md my-2'
+      />
+    ),
+  },
+  {
+    header: "Status",
+    accessorKey: "adopted",
+    cell: ({ row }) => (row?.original?.adopted ? "Adopted" : "Available"),
+  },
+  {
+    accessorKey: "action",
+    header: "Action",
+    cell: ({ row }) => (
+      <div className='space-x-2 flex justify-start'>
+        <Link to={`/dashboard/update-pet/${row?.original?._id}`}>
+          <button className='bg-blue-500 text-white px-2 py-1 rounded'>
+            Update
+          </button>
+        </Link>
+        <button
+          onClick={() => handleDelete(row?.original?._id)}
+          className='bg-red-500 text-white px-2 py-1 rounded'>
+          Delete
+        </button>
+        {row?.original?.adopted ? (
+          <button
+            disabled={true}
+            className='bg-emerald-950 text-white px-2 py-1 rounded'>
+            Already Adopted
+          </button>
+        ) : (
+          <button
+            onClick={() => handleAdopted(row?.original?._id)}
+            className='bg-green-500 text-white px-2 py-1 rounded'>
+            Adopt
+          </button>
+        )}
+      </div>
+    ),
+  },
+];
 
   const renderSkeletons = (count) => {
     const skeletonArray = Array.from({ length: count });
@@ -237,7 +190,7 @@ const MyAddedPets = () => {
           <div className='flex flex-col justify-center items-center gap-10'>
             <Skeleton width={300} />
             <table>
-              <tbody>{renderSkeletons(pageSize)}</tbody>
+              <tbody>{renderSkeletons(10)}</tbody>
             </table>
           </div>
         ) : (
@@ -256,81 +209,9 @@ const MyAddedPets = () => {
           `List Of Pets (Added by ${user?.displayName})`
         )}
       </h1>
-      <table className='min-w-full bg-white dark:bg-transparent dark:text-white border border-gray-300'>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr
-              key={headerGroup.id}
-              className='bg-gray-100 border-b border-gray-300'>
-              {headerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}
-                  className='p-4 text-center text-sm font-medium text-gray-700'>
-                  {header.isPlaceholder ? null : (
-                    <div>
-                      {isLoading || loading ? (
-                        <Skeleton
-                          width={header.column.columnDef.header.length * 10}
-                        />
-                      ) : (
-                        flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )
-                      )}
-                      {
-                        {
-                          asc: "🔼",
-                          desc: "🔽",
-                        }[header.column.getIsSorted() ?? null]
-                      }
-                    </div>
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {isLoading || loading
-            ? renderSkeletons(pageSize)
-            : table.getRowModel().rows.map((row, index) => (
-                <tr key={index} className='border-b border-gray-300'>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id} className='text-center'>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-        </tbody>
-      </table>
-      {table.getPageCount() > 1 && (
-        <div className='flex justify-between items-center mt-4'>
-          <button
-            className='px-4 py-2 bg-gray-200 text-gray-700 rounded'
-            onClick={() => table.setPageIndex(pageIndex - 1)}
-            disabled={!table.getCanPreviousPage()}>
-            Previous
-          </button>
-          <span className='text-sm text-gray-700 dark:text-white'>
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
-          </span>
-          <button
-            className={`px-4 py-2 bg-gray-200 text-gray-700 rounded ${
-              table.getCanNextPage() && "bg-blue-400"
-            }`}
-            onClick={() => table.setPageIndex(pageIndex + 1)}
-            disabled={!table.getCanNextPage()}>
-            Next
-          </button>
-        </div>
-      )}
+      <div>
+        <TanStackTable data={data} columns={columns}/>
+      </div>
     </div>
   );
 };
