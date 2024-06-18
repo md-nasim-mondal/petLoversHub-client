@@ -23,7 +23,7 @@ const petCategories = [
 
 const renderSkeletons = (count) => {
   return Array.from({ length: count }).map((_, index) => (
-    <div key={index} className="my-4">
+    <div key={index} className='my-4'>
       <Skeleton height={40} />
     </div>
   ));
@@ -83,7 +83,7 @@ const AddAPet = () => {
         petAge,
         petCategory,
         petLocation,
-        image: image_url,
+        petImage: image_url,
         shortDescription,
         longDescription,
         presentOwner,
@@ -101,12 +101,7 @@ const AddAPet = () => {
   return (
     <div className='flex flex-col justify-center min-h-[95vh]'>
       {isLoading || loading ? (
-        <div className='lg:w-1/2 mx-auto bg-gray-300 dark:bg-cyan-200 dark:bg-opacity-80 p-8 rounded-xl'>
-          {isLoading && <h3 className='text-3xl md:text-4xl font-bold text-center my-6'>
-            Adding Your Pet...
-          </h3>}
-          {renderSkeletons(10)}
-        </div>
+        renderSkeletons(10)
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -203,7 +198,7 @@ const AddAPet = () => {
             <label htmlFor='shortDescription' className='font-semibold'>
               Short Description
             </label>
-            <input
+            <textarea
               className='rounded-lg'
               type='text'
               id='shortDescription'
@@ -258,4 +253,3 @@ const AddAPet = () => {
 };
 
 export default AddAPet;
-

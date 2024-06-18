@@ -9,10 +9,9 @@ const DashboardLayout = () => {
       {/* Sidebar */}
       <Sidebar isDrawerOpen={isDrawerOpen} setDrawerOpen={setDrawerOpen} />
       {/* Outlet ----> Dynamic Content */}
-      <div className={`flex-1 md:p-10 ${isDrawerOpen && "md:ml-80 md:p-0"}`}>
-        <div className='p-5'>
-          <Outlet />
-        </div>
+      <div
+        className={`flex-1 p-5 md:p-10 ${isDrawerOpen && "md:ml-80 md:p-0"}`}>
+        <Outlet />
       </div>
     </div>
   );

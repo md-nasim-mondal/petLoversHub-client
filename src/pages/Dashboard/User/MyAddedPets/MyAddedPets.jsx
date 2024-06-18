@@ -110,7 +110,7 @@ const MyAddedPets = () => {
         cell: (info) => info.row.original.index + 1,
       },
       {
-        accessorKey: "image",
+        accessorKey: "petImage",
         header: "Image",
         cell: ({ getValue }) => (
           <img
@@ -234,9 +234,11 @@ const MyAddedPets = () => {
     return (
       <h1 className='text-3xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
         {isLoading || loading ? (
-          <div className="flex flex-col justify-center items-center gap-10">
+          <div className='flex flex-col justify-center items-center gap-10'>
             <Skeleton width={300} />
-            {renderSkeletons(pageSize)}
+            <table>
+              <tbody>{renderSkeletons(pageSize)}</tbody>
+            </table>
           </div>
         ) : (
           `You haven't any added any pet.`
