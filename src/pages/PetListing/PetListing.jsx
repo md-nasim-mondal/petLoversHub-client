@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
+import React, { useState, useEffect } from "react";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
@@ -58,8 +58,8 @@ const PetListing = () => {
       <Helmet>
         <title>PetLoversHub || Pet-Listing</title>
       </Helmet>
-      <h3 className='text-3xl mb-4 text-center dark:text-white'>
-        Here is the List of Available Pet for Adopted
+      <h3 className='text-3xl mb-4 text-center dark:text-white font-bold'>
+        Here is the List of Available Pet for Adopting
       </h3>
       <div className='flex flex-col gap-5 md:gap-0 my-6 md:my-12 md:flex-row items-center justify-center'>
         <input

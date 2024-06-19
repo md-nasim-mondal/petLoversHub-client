@@ -86,7 +86,7 @@ const PetDetails = () => {
       {isPetLoading || loading ? (
         <Skeleton height={40} width={300} className='my-6 md:my-12' />
       ) : (
-        <h3 className='mt-6 text-xl md:text-3xl lg:text-5xl font-bold text-center dark:text-white'>
+        <h3 className='mt-6 text-xl md:text-3xl lg:text-4xl font-bold text-center dark:text-white'>
           Details Page of {pet?.petName}{" "}
         </h3>
       )}
@@ -110,37 +110,41 @@ const PetDetails = () => {
           ) : (
             <>
               <div>
-                <h5 className='text-3xl font-bold tracking-tight text-gray-900 dark:text-white'>
+                <h5 className='text-3xl font-bold tracking-tight text-lime-400 dark:text-purple-300'>
                   Pet Name: {pet?.petName}
                 </h5>
-                <h3 className='text-lg font-semibold text-gray-800 dark:text-gray-300'>
+                <h3 className='text-lg font-semibold text-teal-800 dark:text-teal-300'>
                   Pet Age: {pet?.petAge} months
                 </h3>
               </div>
               <div className='flex justify-between items-center'>
-                <h3 className='text-lg font-semibold text-gray-800 dark:text-gray-300'>
+                <h3 className='text-lg font-semibold text-pink-800 dark:text-pink-300'>
                   Pet Category: {pet?.petCategory}
                 </h3>
-                <h3 className='text-lg font-semibold text-gray-800 dark:text-gray-300'>
+                <h3 className='text-lg font-semibold text-blue-800 dark:text-blue-300'>
                   Pet Location: {pet?.petLocation}
                 </h3>
               </div>
               <p className='font-normal text-gray-700 dark:text-white'>
-                <span className='font-bold'>Short Description:</span>
+                <span className='font-bold text-indigo-800 dark:text-indigo-300'>
+                  Short Description:
+                </span>
                 <br />
-                <span className='dark:text-gray-400'>
+                <span className='text-gray-700 dark:text-gray-400'>
                   {pet?.shortDescription}
                 </span>
               </p>
               <p className='font-normal text-gray-700 dark:text-white'>
-                <span className='font-bold'>Full Description:</span>
+                <span className='font-bold text-green-800 dark:text-green-300'>
+                  Full Description:
+                </span>
                 <br />
-                <span className='dark:text-gray-400'>
+                <span className='text-gray-700 dark:text-gray-400'>
                   {pet?.longDescription}
                 </span>
               </p>
               <div>
-                <h2 className='text-xl font-bold text-gray-900 dark:text-white'>
+                <h2 className='text-xl font-bold text-red-800 dark:text-red-300'>
                   Posted by:
                 </h2>
                 <p className='font-normal text-gray-700 dark:text-gray-400'>
@@ -150,7 +154,7 @@ const PetDetails = () => {
                   Email: {pet?.presentOwner?.email}
                 </p>
               </div>
-              <h3 className='text-lg font-semibold text-gray-800 dark:text-gray-300'>
+              <h3 className='text-lg font-semibold text-yellow-800 dark:text-yellow-300'>
                 Posted Date: <span>{formattedDate}</span>
               </h3>
               <button

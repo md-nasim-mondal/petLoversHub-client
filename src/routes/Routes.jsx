@@ -22,15 +22,16 @@ import Profile from "../pages/Dashboard/ForAllUser/Profile/Profile";
 import UpdatePet from "../pages/Dashboard/User/UpdatePet/UpdatePet";
 import UpdateCampaign from "../pages/Dashboard/User/UpdateCampaign";
 import PetDetails from "../pages/PetDetails/PetDetails";
+import CampaignDetails from "../pages/CampaignDetails/CampaignDetails";
 
 export const router = createBrowserRouter([
-  //? Main LayOut 
+  //? Main LayOut
   {
     path: "/",
     element: <Main />,
     errorElement: <ErrorPage />,
     children: [
-    //? navItems Link routes 
+      //? navItems Link routes
       {
         path: "/",
         element: <Home />,
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
       {
         path: "/donation-campaigns",
         element: <DonationCampaigns />,
+      },
+      {
+        path: "/campaign-details/:id",
+        element: <CampaignDetails />,
       },
       {
         path: "/contact",
