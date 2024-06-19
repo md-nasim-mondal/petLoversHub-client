@@ -20,6 +20,7 @@ import AllDonations from "../pages/Dashboard/Admin/AllDonations/AllDonations";
 import AllPets from "../pages/Dashboard/Admin/AllPets/AllPets";
 import Profile from "../pages/Dashboard/ForAllUser/Profile/Profile";
 import UpdatePet from "../pages/Dashboard/User/UpdatePet/UpdatePet";
+import UpdateCampaign from "../pages/Dashboard/User/UpdateCampaign";
 
 export const router = createBrowserRouter([
   //? Main LayOut 
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
       {
         path: "create-donation-campaign",
         element: <CreateDonationCampaign />,
+      },
+      {
+        path: "update-campaign/:id",
+        element: <UpdateCampaign />,
       },
       {
         path: "my-donation-campaigns",

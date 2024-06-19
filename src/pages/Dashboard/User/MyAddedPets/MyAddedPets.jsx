@@ -202,7 +202,7 @@ const columns = [
 
   return (
     <div className='mx-auto p-4 overflow-x-auto'>
-      <h1 className='text-3xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
+      <h1 className='text-2xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
         {isLoading || loading ? (
           <Skeleton width={300} />
         ) : (
