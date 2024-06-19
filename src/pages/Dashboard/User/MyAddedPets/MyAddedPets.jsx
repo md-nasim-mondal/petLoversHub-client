@@ -29,7 +29,7 @@ const MyAddedPets = () => {
   });
 
   // Delete
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: deletePet } = useMutation({
     mutationFn: async (id) => {
       const { data } = await axiosSecure.delete(`/pet/${id}`);
       return data;
@@ -64,7 +64,7 @@ const MyAddedPets = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await mutateAsync(id);
+          await deletePet(id);
         } catch (err) {
           toast.error(err.message);
         }
