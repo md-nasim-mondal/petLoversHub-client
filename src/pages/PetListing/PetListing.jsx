@@ -108,7 +108,7 @@ const PetListing = () => {
                       <p className='text-teal-500'>
                         Location: {pet?.petLocation}
                       </p>
-                      <Link to={`/pets/${pet?._id}`}>
+                      <Link to={`/pet-details/${pet?._id}`}>
                         <button className='mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600'>
                           View Details
                         </button>

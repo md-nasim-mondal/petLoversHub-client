@@ -21,6 +21,7 @@ import AllPets from "../pages/Dashboard/Admin/AllPets/AllPets";
 import Profile from "../pages/Dashboard/ForAllUser/Profile/Profile";
 import UpdatePet from "../pages/Dashboard/User/UpdatePet/UpdatePet";
 import UpdateCampaign from "../pages/Dashboard/User/UpdateCampaign";
+import PetDetails from "../pages/PetDetails/PetDetails";
 
 export const router = createBrowserRouter([
   //? Main LayOut 
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/pet-listing",
         element: <PetListing />,
+      },
+      {
+        path: "/pet-details/:id",
+        element: <PetDetails />,
       },
       {
         path: "/donation-campaigns",

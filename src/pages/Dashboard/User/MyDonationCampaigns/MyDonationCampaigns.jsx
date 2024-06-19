@@ -4,15 +4,21 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const MyDonationCampaigns = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
   const [showDonators, setShowDonators] = useState(false);
   const [selectedCampaign, setSelectedCampaign] = useState(null);
-  const [pauseStatus, setPauseStatus] = useState(null)
+  const [pauseStatus, setPauseStatus] = useState(null);
 
-  const { data: campaigns = [], refetch } = useQuery({
+  const {
+    data: campaigns = [],
+    refetch,
+    isLoading: isCampaignsLoading,
+  } = useQuery({
     queryKey: ["campaigns", user?.email],
     enabled: !loading && !!user?.email,
     queryFn: async () => {
@@ -25,32 +31,29 @@ const MyDonationCampaigns = () => {
     },
   });
 
- const { mutateAsync: updateCampaignPauseStatus } = useMutation({
-   mutationFn: async (id) => {
-     const { data } = await axiosSecure.patch(
-       `/updateStatus-campaign/${id}`,
-       {pauseStatus: !pauseStatus} 
-     );
-     return data;
-   },
-   onSuccess: () => {
-     toast.success("Campaign Pause Status Successfully Updated!!");
-     refetch();
-   },
-   onError: (err) => {
-     toast.error(err.message);
-   },
- });
+  const { mutateAsync: updateCampaignPauseStatus } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axiosSecure.patch(`/updateStatus-campaign/${id}`, {
+        pauseStatus: !pauseStatus,
+      });
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Campaign Pause Status Successfully Updated!!");
+      refetch();
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
 
   const handlePause = async (campaignId) => {
-    // Implement pause logic
     try {
       updateCampaignPauseStatus(campaignId);
     } catch (err) {
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
-
 
   const handleViewDonators = (campaign) => {
     setSelectedCampaign(campaign);
@@ -64,70 +67,78 @@ const MyDonationCampaigns = () => {
 
   return (
     <div className='container mx-auto'>
-      <h1 className='text-2xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
-        Created Donation Campaigns List Of {user?.displayName}{" "}
-      </h1>
+      {isCampaignsLoading || loading ? (
+        <Skeleton height={40} width={300} className='my-6 md:my-12 mx-auto' />
+      ) : (
+        <h1 className='text-2xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
+          Created Donation Campaigns List Of {user?.displayName}
+        </h1>
+      )}
       <div className='overflow-x-auto'>
-        <table className='table-auto w-full dark:text-white'>
-          <thead>
-            <tr>
-              <th className='border px-4 py-2'>Pet Name</th>
-              <th className='border px-4 py-2'>Maximum Donation Amount</th>
-              <th className='border px-4 py-2'>Donation Progress</th>
-              <th className='border px-4 py-2'>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {campaigns.map((campaign) => (
-              <tr key={campaign?._id}>
-                <td className='border px-4 py-2'>{campaign?.petName}</td>
-                <td className='border px-4 py-2'>
-                  {campaign?.maxDonationAmount}
-                </td>
-                <td className='border px-4 py-2'>
-                  <div className='bg-gray-200 w-full'>
-                    <div
-                      className='bg-green-500 text-xs leading-none py-1 text-center text-white'
-                      style={{
-                        width: `${
+        {isCampaignsLoading || loading ? (
+          <Skeleton count={5} height={40} className='my-2' />
+        ) : (
+          <table className='table-auto w-full dark:text-white'>
+            <thead>
+              <tr>
+                <th className='border px-4 py-2'>Pet Name</th>
+                <th className='border px-4 py-2'>Maximum Donation Amount</th>
+                <th className='border px-4 py-2'>Donation Progress</th>
+                <th className='border px-4 py-2'>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {campaigns.map((campaign) => (
+                <tr key={campaign?._id}>
+                  <td className='border px-4 py-2'>{campaign?.petName}</td>
+                  <td className='border px-4 py-2'>
+                    {campaign?.maxDonationAmount}
+                  </td>
+                  <td className='border px-4 py-2'>
+                    <div className='bg-gray-200 w-full'>
+                      <div
+                        className='bg-green-500 text-xs leading-none py-1 text-center text-white'
+                        style={{
+                          width: `${
+                            (campaign?.donatedAmount /
+                              campaign?.maxDonationAmount) *
+                            100
+                          }%`,
+                        }}>
+                        {Math.round(
                           (campaign?.donatedAmount /
                             campaign?.maxDonationAmount) *
-                          100
-                        }%`,
-                      }}>
-                      {Math.round(
-                        (campaign?.donatedAmount /
-                          campaign?.maxDonationAmount) *
-                          100
-                      )}
-                      %
+                            100
+                        )}
+                        %
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td className='border px-4 py-2'>
-                  <button
-                    className='text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900'
-                    onClick={() => {
-                      handlePause(campaign?._id);
-                      setPauseStatus(campaign?.pauseStatus);
-                    }}>
-                    {campaign?.pauseStatus ? "Unpause" : "Pause"}
-                  </button>{" "}
-                  <Link to={`/dashboard/update-campaign/${campaign?._id}`}>
-                    <button className='text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>
-                      Edit
+                  </td>
+                  <td className='border px-4 py-2'>
+                    <button
+                      className='text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900'
+                      onClick={() => {
+                        handlePause(campaign?._id);
+                        setPauseStatus(campaign?.pauseStatus);
+                      }}>
+                      {campaign?.pauseStatus ? "Unpause" : "Pause"}
                     </button>{" "}
-                  </Link>
-                  <button
-                    className='text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
-                    onClick={() => handleViewDonators(campaign)}>
-                    View Donators
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                    <Link to={`/dashboard/update-campaign/${campaign?._id}`}>
+                      <button className='text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>
+                        Edit
+                      </button>{" "}
+                    </Link>
+                    <button
+                      className='text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+                      onClick={() => handleViewDonators(campaign)}>
+                      View Donators
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
 
       {selectedCampaign && (
