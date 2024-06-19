@@ -40,7 +40,7 @@ const Login = () => {
         "Please write your email first in the email input field!!"
       );
     try {
-      setLoading(true)
+      setLoading(true);
       await resetPassword(email);
       toast.success(
         "Request Success! Check your email for further process.........."
@@ -54,14 +54,14 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       await signInWithGoogle();
       navigate(from);
       toast.success("LogIn Successful With Google");
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       toast.error(err.message);
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -72,7 +72,7 @@ const Login = () => {
       await signInWithGitHub();
       navigate(from);
       toast.success("LogIn Successful With Github!!");
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       // console.log(err);
       toast.error(err.message);
@@ -81,14 +81,14 @@ const Login = () => {
   };
 
   return (
-    <div className='flex justify-center items-center min-h-[80vh]'>
+    <div className='flex justify-center items-center min-h-[80vh] bg-gray-100 dark:bg-gray-900'>
       <Helmet>
         <title>PetLoversHub | Login</title>
       </Helmet>
-      <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
+      <div className='flex flex-col w-full max-w-xl p-6 rounded-md sm:p-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-lg'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Log In</h1>
-          <p className='text-sm text-gray-400'>
+          <p className='text-sm text-gray-600 dark:text-gray-400'>
             Sign in to access your account
           </p>
         </div>
@@ -107,7 +107,7 @@ const Login = () => {
                 id='email'
                 required
                 placeholder='Enter Your Email Here'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 dark:border-gray-700 focus:outline-rose-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100'
                 data-temp-mail-org='0'
               />
             </div>
@@ -124,7 +124,7 @@ const Login = () => {
                 id='password'
                 required
                 placeholder='*******'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 dark:border-gray-700 focus:outline-rose-500 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100'
               />
             </div>
           </div>
@@ -133,7 +133,7 @@ const Login = () => {
             <button
               disabled={loading}
               type='submit'
-              className='bg-rose-500 w-full rounded-md py-3 text-white'>
+              className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-full'>
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
               ) : (
@@ -145,21 +145,21 @@ const Login = () => {
         <div className='space-y-1'>
           <button
             onClick={handleResetPassword}
-            className='text-xs hover:underline hover:text-rose-500 text-gray-400'>
+            className='text-xs hover:underline hover:text-rose-500 text-gray-400 dark:text-gray-500'>
             Forgot password?
           </button>
         </div>
         <div className='flex items-center pt-4 space-x-1'>
-          <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
-          <p className='px-3 text-sm dark:text-gray-400'>
+          <div className='flex-1 h-px sm:w-16 bg-gray-300 dark:bg-gray-700'></div>
+          <p className='px-3 text-sm text-gray-600 dark:text-gray-400'>
             Login with social accounts
           </p>
-          <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
+          <div className='flex-1 h-px sm:w-16 bg-gray-300 dark:bg-gray-700'></div>
         </div>
         <button
           disabled={loading}
           onClick={handleGoogleSignIn}
-          className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+          className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 dark:border-gray-700 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600'>
           <FcGoogle size={32} />
           <p>Continue with Google</p>
         </button>
@@ -167,7 +167,7 @@ const Login = () => {
           disabled={loading}
           type='button'
           onClick={handleGithubSignIn}
-          className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 md:p-3 border-gray-300 border-rounded cursor-pointer'>
+          className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 md:p-3 border-gray-300 dark:border-gray-700 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600'>
           <svg
             className='w-6 h-6 me-1'
             aria-hidden='true'
@@ -182,11 +182,9 @@ const Login = () => {
           </svg>
           <p>Continue with Github</p>
         </button>
-        <p className='px-6 text-sm text-center text-gray-400'>
+        <p className='px-6 text-sm text-center text-gray-600 dark:text-gray-400'>
           Don&apos;t have an account yet?{" "}
-          <Link
-            to='/signup'
-            className='hover:underline hover:text-rose-500 text-gray-600'>
+          <Link to='/signup' className='hover:underline text-blue-500'>
             Sign up
           </Link>
         </p>

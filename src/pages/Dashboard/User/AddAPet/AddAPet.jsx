@@ -99,18 +99,20 @@ const AddAPet = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center min-h-[95vh]'>
+    <div className='flex flex-col justify-center min-h-[95vh] bg-gray-100 dark:bg-gray-900 px-4 sm:px-6 lg:px-8'>
       {isLoading || loading ? (
         renderSkeletons(10)
       ) : (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='lg:w-1/2 mx-auto bg-gray-300 dark:bg-cyan-200 dark:bg-opacity-80 p-8 rounded-xl'>
-          <h3 className='text-3xl md:text-4xl font-bold text-center my-6'>
+          className='w-full max-w-3xl mx-auto bg-white dark:bg-gray-800 dark:bg-opacity-90 p-6 sm:p-8 rounded-xl shadow-lg max-h-[80vh] overflow-auto'>
+          <h3 className='text-2xl sm:text-3xl md:text-4xl font-bold text-center my-4 sm:my-6 text-gray-900 dark:text-white'>
             Add Your Pet For Adoption
           </h3>
           <div className='flex flex-col space-y-2 my-3'>
-            <label htmlFor='petImage' className='font-semibold'>
+            <label
+              htmlFor='petImage'
+              className='font-semibold text-gray-700 dark:text-gray-300'>
               Pet Image
             </label>
             <input
@@ -118,18 +120,20 @@ const AddAPet = () => {
               type='file'
               id='petImage'
               name='petImage'
-              className='rounded-md'
+              className='rounded-md bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 p-2'
             />
             {errors.petImage && (
               <p className='text-red-600'>{errors.petImage.message}</p>
             )}
           </div>
           <div className='flex flex-col space-y-2 my-3'>
-            <label htmlFor='petName' className='font-semibold'>
+            <label
+              htmlFor='petName'
+              className='font-semibold text-gray-700 dark:text-gray-300'>
               Pet Name
             </label>
             <input
-              className='rounded-lg'
+              className='rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 p-2'
               type='text'
               id='petName'
               {...register("petName", { required: "Pet name is required" })}
@@ -139,11 +143,13 @@ const AddAPet = () => {
             )}
           </div>
           <div className='flex flex-col space-y-2 my-3'>
-            <label htmlFor='petAge' className='font-semibold'>
-              Pet Age(month)
+            <label
+              htmlFor='petAge'
+              className='font-semibold text-gray-700 dark:text-gray-300'>
+              Pet Age (months)
             </label>
             <input
-              className='rounded-lg'
+              className='rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 p-2'
               type='number'
               id='petAge'
               {...register("petAge", {
@@ -163,7 +169,9 @@ const AddAPet = () => {
             )}
           </div>
           <div className='flex flex-col space-y-2 my-3'>
-            <label htmlFor='petCategory' className='font-semibold'>
+            <label
+              htmlFor='petCategory'
+              className='font-semibold text-gray-700 dark:text-gray-300'>
               Pet Category
             </label>
             <Controller
@@ -171,7 +179,11 @@ const AddAPet = () => {
               control={control}
               rules={{ required: "Pet category is required" }}
               render={({ field }) => (
-                <Select {...field} options={petCategories} />
+                <Select
+                  {...field}
+                  options={petCategories}
+                  className='rounded-md bg-gray-200 dark:bg-gray-700 text-gray-900 border border-gray-300 dark:border-gray-600 p-2'
+                />
               )}
             />
             {errors.petCategory && (
@@ -179,11 +191,13 @@ const AddAPet = () => {
             )}
           </div>
           <div className='flex flex-col space-y-2 my-3'>
-            <label htmlFor='petLocation' className='font-semibold'>
+            <label
+              htmlFor='petLocation'
+              className='font-semibold text-gray-700 dark:text-gray-300'>
               Pet Location
             </label>
             <input
-              className='rounded-lg'
+              className='rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 p-2'
               type='text'
               id='petLocation'
               {...register("petLocation", {
@@ -195,11 +209,13 @@ const AddAPet = () => {
             )}
           </div>
           <div className='flex flex-col space-y-2 my-3'>
-            <label htmlFor='shortDescription' className='font-semibold'>
+            <label
+              htmlFor='shortDescription'
+              className='font-semibold text-gray-700 dark:text-gray-300'>
               Short Description
             </label>
             <textarea
-              className='rounded-lg'
+              className='rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-300 border border-gray-300 dark:border-gray-600 p-2'
               type='text'
               id='shortDescription'
               {...register("shortDescription", {
@@ -211,7 +227,9 @@ const AddAPet = () => {
             )}
           </div>
           <div className='h-40 my-6 space-y-3'>
-            <label htmlFor='longDescription' className='font-semibold'>
+            <label
+              htmlFor='longDescription'
+              className='font-semibold text-gray-700 dark:text-gray-300'>
               Long Description
             </label>
             <Controller
@@ -224,7 +242,7 @@ const AddAPet = () => {
               }}
               render={({ field }) => (
                 <ReactQuill
-                  className='h-20'
+                  className='bg-gray-200 text-gray-900'
                   value={field.value}
                   onChange={field.onChange}
                 />
@@ -234,11 +252,11 @@ const AddAPet = () => {
               <p className='text-red-600'>{errors.longDescription.message}</p>
             )}
           </div>
-          <div>
+          <div className='pt-8 md:pt-0 text-center'>
             <button
               type='submit'
               disabled={isLoading}
-              className='text-white hover:bg-green-500 bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'>
+              className='text-white bg-gradient-to-r from-teal-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 mb-2'>
               {isLoading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
               ) : (
