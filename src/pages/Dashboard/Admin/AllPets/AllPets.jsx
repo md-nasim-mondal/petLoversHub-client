@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useAuth from "../../../../hooks/useAuth";
 import SkeletonTable from "../../../../components/SkeletonTable/SkeletonTable";
+import { Helmet } from "react-helmet-async";
 
 const AllPets = () => {
   const axiosSecure = useAxiosSecure();
@@ -179,6 +180,9 @@ const AllPets = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>PetLoversHub || All Pets</title>
+      </Helmet>
       <h3 className='text-2xl md:text-3xl xl:text-4xl dark:text-white text-center font-bold'>
         List of All Pets
       </h3>

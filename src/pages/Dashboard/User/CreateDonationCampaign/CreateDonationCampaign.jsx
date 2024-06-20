@@ -8,6 +8,7 @@ import { useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Helmet } from "react-helmet-async";
 
 const CreateDonationCampaign = () => {
   const { user, loading } = useAuth();
@@ -75,6 +76,9 @@ const CreateDonationCampaign = () => {
 
   return (
     <div className='max-w-xl mx-auto mt-10 p-6 bg-white dark:bg-gray-900 shadow-md rounded-md'>
+      <Helmet>
+        <title>PetLoversHub || Create-Donation-Campaigns</title>
+      </Helmet>
       {isLoading || loading ? (
         <Skeleton height={30} width={300} />
       ) : (

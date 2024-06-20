@@ -8,6 +8,7 @@ import DonateModal from "../../components/Modal/DonateModal";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -45,6 +46,9 @@ const CampaignDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>PetLoversHub || CampaignDetails</title>
+      </Helmet>
       {isCampaignLoading || loading ? (
         <Skeleton height={40} width={400} className='mx-auto mt-6' />
       ) : (
@@ -89,7 +93,12 @@ const CampaignDetails = () => {
                   <span className='font-semibold dark:text-white'>
                     Campaign Status:
                   </span>{" "}
-                  <span className={`px-2 py-1 rounded-md ${campaign?.pauseStatus ? "bg-orange-300" : 'bg-blue-300'}`}>{campaign?.pauseStatus ? "Paused" : "Unpaused"}</span>
+                  <span
+                    className={`px-2 py-1 rounded-md ${
+                      campaign?.pauseStatus ? "bg-orange-300" : "bg-blue-300"
+                    }`}>
+                    {campaign?.pauseStatus ? "Paused" : "Unpaused"}
+                  </span>
                 </p>
               </div>
               <p className='text-xl font-bold text-green-800 dark:text-green-300'>

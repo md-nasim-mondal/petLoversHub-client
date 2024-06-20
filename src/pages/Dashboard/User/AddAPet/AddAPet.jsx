@@ -11,6 +11,7 @@ import useAuth from "../../../../hooks/useAuth";
 import { imageUpload } from "../../../../api/utils";
 import Skeleton from "react-loading-skeleton";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { Helmet } from "react-helmet-async";
 
 const petCategories = [
   { value: "Cat", label: "Cat" },
@@ -100,6 +101,9 @@ const AddAPet = () => {
 
   return (
     <div className='flex flex-col justify-center min-h-[95vh] bg-gray-100 dark:bg-gray-900 px-4 sm:px-6 lg:px-8'>
+      <Helmet>
+        <title>PetLoversHub || Add A Pet</title>
+      </Helmet>
       {isLoading || loading ? (
         renderSkeletons(10)
       ) : (

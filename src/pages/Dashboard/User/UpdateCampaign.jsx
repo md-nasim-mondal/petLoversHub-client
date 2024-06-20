@@ -8,6 +8,7 @@ import { imageUpload } from "../../../api/utils";
 import { TbFidgetSpinner } from "react-icons/tb";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Helmet } from "react-helmet-async";
 
 const UpdateCampaign = () => {
   const { id } = useParams();
@@ -85,6 +86,9 @@ const UpdateCampaign = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>PetLoversHub || Update Pet</title>
+      </Helmet>
       {isCampaignLoading || loading ? (
         <Skeleton height={40} width={300} />
       ) : (

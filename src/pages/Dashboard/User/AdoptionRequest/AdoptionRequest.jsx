@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import SkeletonTable from "../../../../components/SkeletonTable/SkeletonTable";
+import { Helmet } from "react-helmet-async";
 
 const AdoptionRequest = () => {
   const { user, loading } = useAuth();
@@ -164,6 +165,9 @@ const AdoptionRequest = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>PetLoversHub || Adoption Request</title>
+      </Helmet>
       <h1 className='text-2xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
         {isLoading || loading ? (
           <Skeleton width={300} />

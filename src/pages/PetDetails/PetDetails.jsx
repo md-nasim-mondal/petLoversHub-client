@@ -8,6 +8,7 @@ import AdoptModal from "../../components/Modal/AdoptModal";
 import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Helmet } from "react-helmet-async";
 
 const PetDetails = () => {
   const { id } = useParams();
@@ -83,6 +84,9 @@ const PetDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>PetLoversHub || Pet-Details</title>
+      </Helmet>
       {isPetLoading || loading ? (
         <Skeleton height={40} width={300} className='my-6 md:my-12' />
       ) : (

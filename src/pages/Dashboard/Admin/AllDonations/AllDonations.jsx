@@ -8,6 +8,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTable from "../../../../components/SkeletonTable/SkeletonTable";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyDonationCampaigns = () => {
   const { loading } = useAuth();
@@ -122,6 +123,9 @@ const MyDonationCampaigns = () => {
 
   return (
     <div className='container mx-auto'>
+      <Helmet>
+        <title>PetLoversHub || All Donations</title>
+      </Helmet>
       {isCampaignsLoading || loading ? (
         <Skeleton height={40} width={300} className='my-6 md:my-12 mx-auto' />
       ) : (

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import TanStackTable from "../../../../components/Dashboard/Table/TanStackTable";
+import { Helmet } from "react-helmet-async";
 
 const MyAddedPets = () => {
   const { user, loading } = useAuth();
@@ -207,6 +208,9 @@ const MyAddedPets = () => {
 
   return (
     <div className='mx-auto p-4 overflow-x-auto'>
+      <Helmet>
+        <title>PetLoversHub || My Added Pets</title>
+      </Helmet>
       <h1 className='text-2xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
         {isLoading || loading ? (
           <Skeleton width={300} />
