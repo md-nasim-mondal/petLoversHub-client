@@ -23,6 +23,8 @@ import UpdatePet from "../pages/Dashboard/User/UpdatePet/UpdatePet";
 import UpdateCampaign from "../pages/Dashboard/User/UpdateCampaign";
 import PetDetails from "../pages/PetDetails/PetDetails";
 import CampaignDetails from "../pages/CampaignDetails/CampaignDetails";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   //? Main LayOut
@@ -42,7 +44,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/pet-details/:id",
-        element: <PetDetails />,
+        element: (
+          <PrivateRoute>
+            <PetDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/donation-campaigns",
@@ -50,7 +56,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/campaign-details/:id",
-        element: <CampaignDetails />,
+        element: (
+          <PrivateRoute>
+            <CampaignDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/contact",
@@ -69,12 +79,20 @@ export const router = createBrowserRouter([
   //? Dashboard Layout
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       //? for All Users
       {
         index: true,
-        element: <Dashboard />,
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
       },
       {
         path: "profile",
@@ -83,48 +101,98 @@ export const router = createBrowserRouter([
       //? user dashboard routes
       {
         path: "add-pet",
-        element: <AddAPet />,
+        element: (
+          <PrivateRoute>
+            <AddAPet />
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-added-pets",
-        element: <MyAddedPets />,
+        element: (
+          <PrivateRoute>
+            <MyAddedPets />
+          </PrivateRoute>
+        ),
       },
       {
         path: "update-pet/:id",
-        element: <UpdatePet />,
+        element: (
+          <PrivateRoute>
+            <UpdatePet />
+          </PrivateRoute>
+        ),
       },
       {
         path: "adoption-request",
-        element: <AdoptionRequest />,
+        element: (
+          <PrivateRoute>
+            <AdoptionRequest />
+          </PrivateRoute>
+        ),
       },
       {
         path: "create-donation-campaign",
-        element: <CreateDonationCampaign />,
+        element: (
+          <PrivateRoute>
+            <CreateDonationCampaign />
+          </PrivateRoute>
+        ),
       },
       {
         path: "update-campaign/:id",
-        element: <UpdateCampaign />,
+        element: (
+          <PrivateRoute>
+            <UpdateCampaign />
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-donation-campaigns",
-        element: <MyDonationCampaigns />,
+        element: (
+          <PrivateRoute>
+            <MyDonationCampaigns />
+          </PrivateRoute>
+        ),
       },
       {
         path: "my-donations",
-        element: <MyDonations />,
+        element: (
+          <PrivateRoute>
+            <MyDonations />
+          </PrivateRoute>
+        ),
       },
       //? Admin Dashboard Routes
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <Users />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "all-pets",
-        element: <AllPets />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AllPets />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
         path: "all-donations",
-        element: <AllDonations />,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AllDonations />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
     ],
   },
