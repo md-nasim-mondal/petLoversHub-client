@@ -179,7 +179,7 @@ const AllPets = () => {
 
   return (
     <div>
-      <h3 className='text-2xl md:text-3xl dark:text-white text-center'>
+      <h3 className='text-2xl md:text-3xl xl:text-4xl dark:text-white text-center font-bold'>
         List of All Pets
       </h3>
       <div>

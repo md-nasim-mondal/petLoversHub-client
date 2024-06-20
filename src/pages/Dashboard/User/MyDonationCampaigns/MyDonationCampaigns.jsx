@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import SkeletonTable from "../../../../components/SkeletonTable/SkeletonTable";
+import Swal from "sweetalert2";
 
 const MyDonationCampaigns = () => {
   const { user, loading } = useAuth();
@@ -49,11 +50,23 @@ const MyDonationCampaigns = () => {
   });
 
   const handlePause = async (campaignId) => {
-    try {
-      updateCampaignPauseStatus(campaignId);
-    } catch (err) {
-      toast.error(err.message);
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Change Pause Status",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          updateCampaignPauseStatus(campaignId);
+        } catch (err) {
+          toast.error(err.message);
+        }
+      }
+    });
   };
 
   const handleViewDonators = (campaign) => {
@@ -103,11 +116,13 @@ const MyDonationCampaigns = () => {
             <tbody>
               {campaigns.map((campaign) => (
                 <tr key={campaign?._id}>
-                  <td className='border px-4 py-2'>{campaign?.petName}</td>
-                  <td className='border px-4 py-2'>
-                    {campaign?.maxDonationAmount}
+                  <td className='border px-4 py-2 text-center'>
+                    {campaign?.petName}
                   </td>
-                  <td className='border px-4 py-2'>
+                  <td className='border px-4 py-2 text-center'>
+                    {campaign?.maxDonationAmount} $
+                  </td>
+                  <td className='border px-4 py-2 text-center'>
                     <div className='bg-gray-200 w-full'>
                       <div
                         className='bg-green-500 text-xs leading-none py-1 text-center text-white'
@@ -127,7 +142,7 @@ const MyDonationCampaigns = () => {
                       </div>
                     </div>
                   </td>
-                  <td className='border px-4 py-2'>
+                  <td className='border px-4 py-2 text-center'>
                     <button
                       className='text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900'
                       onClick={() => {
