@@ -4,15 +4,15 @@ import logo from "../../../assets/images/petLoversHubLogo.png";
 const Footer = () => {
   return (
     <footer className='bg-white rounded-lg shadow dark:bg-gray-900 m-4 mb-0'>
-      <div className='w-full max-w-screen-xl mx-auto p-4 md:py-8'>
-        <div className='sm:flex sm:items-center sm:justify-between'>
+      <div className='w-full mx-auto p-4 md:py-8'>
+        <div className='sm:flex sm:items-center sm:justify-between max-w-screen-xl mx-auto'>
           <Link
             to='/'
             className='flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse'>
             <img
               src={logo}
               className='h-8 md:h-10 lg:h-12'
-              alt='Flowbite Logo'
+              alt='petLoversHub Logo '
             />
           </Link>
           <ul className='flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400'>

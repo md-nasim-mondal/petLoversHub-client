@@ -93,7 +93,7 @@ const Navbar = () => {
 
   return (
     <div className='fixed w-full bg-white z-10 shadow-sm rounded-lg dark:bg-gray-900'>
-      <div className='py-4 border-b-[1px]'>
+      <div className='border-b-[1px]'>
         <Container>
           <nav className='bg-white border-gray-200 dark:bg-gray-900'>
             <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto md:p-4 relative'>

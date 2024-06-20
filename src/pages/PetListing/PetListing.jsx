@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import PetCard from "../../components/Home/PetCard";
 
 const PetListing = () => {
   const axiosCommon = useAxiosCommon();
@@ -89,31 +89,7 @@ const PetListing = () => {
               <React.Fragment key={pageIndex}>
                 {page.pets.map((pet) => (
                   <React.Fragment key={pet._id}>
-                    <div className='p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
-                      <img
-                        className='rounded-t-lg h-48 w-full'
-                        src={pet?.petImage}
-                        alt={pet?.petName}
-                      />
-                      <h4 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
-                        Pet Name:{" "}
-                        <span className='text-blue-500'>{pet?.petName}</span>
-                      </h4>
-                      <p className='mb-3 font-medium text-gray-700 dark:text-gray-400'>
-                        Pet Age:{" "}
-                        <span className='text-green-500'>
-                          {pet?.petAge} months
-                        </span>
-                      </p>
-                      <p className='text-teal-500'>
-                        Location: {pet?.petLocation}
-                      </p>
-                      <Link to={`/pet-details/${pet?._id}`}>
-                        <button className='mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600'>
-                          View Details
-                        </button>
-                      </Link>
-                    </div>
+                    <PetCard pet={pet} />
                   </React.Fragment>
                 ))}
               </React.Fragment>

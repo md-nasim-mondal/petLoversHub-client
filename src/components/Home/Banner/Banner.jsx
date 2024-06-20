@@ -31,7 +31,7 @@ const Banner = () => {
         className='mySwiper'>
         <SwiperSlide>
           <div
-            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto my-12 md:my-16'
+            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 mt-6 md:mb-16 md:mt-8'
             style={{
               backgroundImage: `url(${p1})`,
             }}>
@@ -57,7 +57,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto my-12 md:my-16'
+            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 mt-6 md:mb-16 md:mt-8'
             style={{
               backgroundImage: `url(${p2})`,
             }}>
@@ -84,7 +84,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto my-12 md:my-16'
+            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 mt-6 md:mb-16 md:mt-8'
             style={{
               backgroundImage: `url(${p3})`,
             }}>
@@ -110,7 +110,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto my-12 md:my-16'
+            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 mt-6 md:mb-16 md:mt-8'
             style={{
               backgroundImage: `url(${p4})`,
             }}>
@@ -136,7 +136,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto my-12 md:my-16'
+            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 mt-6 md:mb-16 md:mt-8'
             style={{
               backgroundImage: `url(${p5})`,
             }}>
@@ -161,7 +161,7 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto my-12 md:my-16'
+            className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 mt-6 md:mb-16 md:mt-8'
             style={{
               backgroundImage: `url(${p6})`,
             }}>
