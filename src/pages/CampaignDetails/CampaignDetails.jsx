@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import DonateModal from "../../components/Modal/DonateModal";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import toast from "react-hot-toast";
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -36,6 +37,12 @@ const CampaignDetails = () => {
     setIsDonateModalOpen(false);
   };
 
+  const handleDonateModal = () => {
+    const pause = campaign?.pauseStatus;
+    if (pause) return toast.error('This Campaign is Pause So You cannot Donate For this pet');
+     setIsDonateModalOpen(true);
+  };
+
   return (
     <div>
       {isCampaignLoading || loading ? (
@@ -59,7 +66,7 @@ const CampaignDetails = () => {
             alt=''
           />
         )}
-        <div className='flex flex-col justify-between p-6 leading-normal space-y-4'>
+        <div className='flex flex-col justify-between p-6 leading-normal space-y-4 relative'>
           {isCampaignLoading ? (
             <>
               <Skeleton height={30} width={300} />
@@ -78,10 +85,16 @@ const CampaignDetails = () => {
                 <p className='text-xl font-bold text-blue-800 dark:text-blue-300'>
                   Donated Amount: {campaign?.donatedAmount} $
                 </p>
-                <p className='text-xl font-bold text-green-800 dark:text-green-300'>
-                  Maximum Donation Amount: {campaign?.maxDonationAmount} $
+                <p>
+                  <span className='font-semibold dark:text-white'>
+                    Campaign Status:
+                  </span>{" "}
+                  <span className={`px-2 py-1 rounded-md ${campaign?.pauseStatus ? "bg-orange-300" : 'bg-blue-300'}`}>{campaign?.pauseStatus ? "Paused" : "Unpaused"}</span>
                 </p>
               </div>
+              <p className='text-xl font-bold text-green-800 dark:text-green-300'>
+                Maximum Donation Amount: {campaign?.maxDonationAmount} $
+              </p>
               <p className='font-medium text-gray-700 dark:text-gray-400'>
                 <span className='text-lg font-bold text-indigo-800 dark:text-indigo-300'>
                   Short Description:
@@ -105,7 +118,7 @@ const CampaignDetails = () => {
                 </p>
               </div>
               <button
-                onClick={() => setIsDonateModalOpen(true)}
+                onClick={() => handleDonateModal()}
                 className='px-6 py-2 mt-4 text-lg font-bold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-all duration-300'>
                 Donate Now
               </button>
