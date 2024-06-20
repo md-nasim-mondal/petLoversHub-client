@@ -1,4 +1,4 @@
-import { useMemo} from "react";
+import { useMemo } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import useAuth from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
@@ -92,75 +92,80 @@ const MyAddedPets = () => {
     });
   };
 
-const data = useMemo(() => pets, [pets]);
+  // Add serial numbers to pets
+  const petsWithSerialNumbers = pets.map((pet, index) => ({
+    ...pet,
+    serialNumber: index + 1,
+  }));
 
-const columns = [
-  {
-    accessorKey: "_id",
-    header: "S/N",
-    cell: ({ row }) => row?.index + 1,
-  },
-  {
-    header: "Pet Name",
-    accessorKey: "petName",
-  },
-  {
-    header: "Category",
-    accessorKey: "petCategory",
-  },
-  {
-    header: "Image",
-    accessorKey: "petImage",
-    cell: ({ getValue }) => (
-      <img
-        src={getValue()}
-        alt='Pet'
-        className='w-16 h-16 object-cover rounded-md my-2'
-      />
-    ),
-  },
-  {
-    header: "Status",
-    accessorKey: "adopted",
-    cell: ({ row }) => (row?.original?.adopted ? "Adopted" : "Available"),
-  },
-  {
-    accessorKey: "action",
-    header: "Action",
-    cell: ({ row }) => (
-      <div className='space-x-2 flex justify-start'>
-        <Link to={`/dashboard/update-pet/${row?.original?._id}`}>
-          <button className='bg-blue-500 text-white px-2 py-1 rounded'>
-            Update
-          </button>
-        </Link>
-        <button
-          onClick={() => handleDelete(row?.original?._id)}
-          className='bg-red-500 text-white px-2 py-1 rounded'>
-          Delete
-        </button>
-        {row?.original?.adopted ? (
+  const data = useMemo(() => petsWithSerialNumbers, [petsWithSerialNumbers]);
+
+  const columns = [
+    {
+      accessorKey: "serialNumber",
+      header: "S/N",
+    },
+    {
+      header: "Pet Name",
+      accessorKey: "petName",
+    },
+    {
+      header: "Category",
+      accessorKey: "petCategory",
+    },
+    {
+      header: "Image",
+      accessorKey: "petImage",
+      cell: ({ getValue }) => (
+        <img
+          src={getValue()}
+          alt='Pet'
+          className='w-16 h-16 object-cover rounded-md my-2 mx-auto'
+        />
+      ),
+    },
+    {
+      header: "Status",
+      accessorKey: "adopted",
+      cell: ({ row }) => (row?.original?.adopted ? "Adopted" : "Available"),
+    },
+    {
+      accessorKey: "action",
+      header: "Action",
+      cell: ({ row }) => (
+        <div className='space-x-2 flex justify-center'>
+          <Link to={`/dashboard/update-pet/${row?.original?._id}`}>
+            <button className='bg-blue-500 text-white px-2 py-1 rounded'>
+              Update
+            </button>
+          </Link>
           <button
-            disabled={true}
-            className='bg-emerald-950 text-white px-2 py-1 rounded'>
-            Already Adopted
+            onClick={() => handleDelete(row?.original?._id)}
+            className='bg-red-500 text-white px-2 py-1 rounded'>
+            Delete
           </button>
-        ) : (
-          <button
-            onClick={() => handleAdopted(row?.original?._id)}
-            className='bg-green-500 text-white px-2 py-1 rounded'>
-            Adopt
-          </button>
-        )}
-      </div>
-    ),
-  },
-];
+          {row?.original?.adopted ? (
+            <button
+              disabled={true}
+              className='bg-emerald-950 text-white px-2 py-1 rounded'>
+              Already Adopted
+            </button>
+          ) : (
+            <button
+              onClick={() => handleAdopted(row?.original?._id)}
+              className='bg-green-500 text-white px-2 py-1 rounded'>
+              Adopt
+            </button>
+          )}
+        </div>
+      ),
+    },
+  ];
 
   const renderSkeletons = (count) => {
     const skeletonArray = Array.from({ length: count });
     return skeletonArray.map((_, index) => (
-      <tr key={index} className=' flex items-center border border-gray-300'>
+      <tr key={index} className='flex items-center border border-gray-300'>
         <td className='text-center'>
           <Skeleton width={50} />
         </td>
@@ -210,7 +215,7 @@ const columns = [
         )}
       </h1>
       <div>
-        <TanStackTable data={data} columns={columns}/>
+        <TanStackTable data={data} columns={columns} />
       </div>
     </div>
   );

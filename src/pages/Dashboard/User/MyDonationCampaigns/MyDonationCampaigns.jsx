@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import SkeletonTable from "../../../../components/SkeletonTable/SkeletonTable";
 
 const MyDonationCampaigns = () => {
   const { user, loading } = useAuth();
@@ -64,6 +65,18 @@ const MyDonationCampaigns = () => {
     setShowDonators(false);
     setSelectedCampaign(null);
   };
+  
+  if (!campaigns.length) {
+    return (
+      <h1 className='text-3xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
+        {isCampaignsLoading || loading ? (
+          <SkeletonTable rows={5} columns={7} />
+        ) : (
+          `You haven't Created Any Campaigns.`
+        )}
+      </h1>
+    );
+  }
 
   return (
     <div className='container mx-auto'>

@@ -48,10 +48,10 @@ const TanStackTable = ({ data, columns }) => {
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className='text-left cursor-pointer px-3 py-6 border'
+                    className='text-center cursor-pointer px-3 py-6 border'
                     onClick={header.column.getToggleSortingHandler()}>
                     {header.isPlaceholder ? null : (
-                      <div className='flex items-center'>
+                      <div className='flex items-center justify-center'>
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext()
@@ -73,7 +73,7 @@ const TanStackTable = ({ data, columns }) => {
             {table.getRowModel().rows.map((row) => (
               <tr className='border-b' key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td className='text-left w-auto border px-3' key={cell.id}>
+                  <td className='text-center w-auto border px-3 py-1' key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

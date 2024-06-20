@@ -5,10 +5,13 @@ import TanStackTable from "../../../../components/Dashboard/Table/TanStackTable"
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import useAuth from "../../../../hooks/useAuth";
+import SkeletonTable from "../../../../components/SkeletonTable/SkeletonTable";
 
 const AllPets = () => {
   const axiosSecure = useAxiosSecure();
-  const { data: pets = [], refetch } = useQuery({
+  const { loading } = useAuth();
+  const { data: pets = [], refetch, isLoading } = useQuery({
     queryKey: ["pets"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/pets`);
@@ -100,13 +103,18 @@ const AllPets = () => {
     });
   };
 
-  const data = useMemo(() => pets, [pets]);
+  // Add serial numbers to pets
+  const petsWithSerialNumbers = pets.map((pet, index) => ({
+    ...pet,
+    serialNumber: index + 1,
+  }));
+
+  const data = useMemo(() => petsWithSerialNumbers, [petsWithSerialNumbers]);
 
   const columns = [
     {
-      accessorKey: "_id",
+      accessorKey: "serialNumber",
       header: "S/N",
-      cell: ({ row }) => row.index + 1,
     },
     {
       header: "Added By",
@@ -127,20 +135,20 @@ const AllPets = () => {
         <img
           src={getValue()}
           alt='Pet'
-          className='w-16 h-16 object-cover rounded-md my-2'
+          className='w-16 h-16 object-cover rounded-md my-2 mx-auto'
         />
       ),
     },
     {
       header: "Status",
-      accessorKey: "status",
+      accessorKey: "adopted",
       cell: ({ row }) => (row.original.adopted ? "Adopted" : "Available"),
     },
     {
       accessorKey: "action",
       header: "Action",
       cell: ({ row }) => (
-        <div className='space-x-2 flex justify-start'>
+        <div className='space-x-2 flex justify-center'>
           <Link to={`/dashboard/update-pet/${row.original._id}`}>
             <button className='bg-blue-500 text-white px-2 py-1 rounded'>
               Update
@@ -175,7 +183,11 @@ const AllPets = () => {
         List of All Pets
       </h3>
       <div>
-        <TanStackTable data={data} columns={columns} />
+        {isLoading || loading ? (
+          <SkeletonTable rows={10} columns={7} />
+        ) : (
+          <TanStackTable data={data} columns={columns} />
+        )}
       </div>
     </div>
   );
