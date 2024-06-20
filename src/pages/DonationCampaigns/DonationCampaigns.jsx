@@ -91,7 +91,7 @@ const DonationCampaigns = () => {
                           {campaign?.donatedAmount} $
                         </span>
                       </p>
-                      <h3>
+                      <h3 className="dark:text-white">
                         <span>PostedAt:</span>{" "}
                         {format(new Date(campaign?.createdAt), "MMMM dd, yyyy")}
                       </h3>
