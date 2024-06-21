@@ -12,7 +12,7 @@ const Main = () => {
   return (
     <div className=' bg-white dark:bg-gray-900'>
       <Navbar />
-      <div onClick={handleMenubar} className='pt-32 min-h-[calc(100vh-120px)]'>
+      <div onClick={handleMenubar} className='pt-16 md:pt-24 lg:pt-32 min-h-[calc(100vh-120px)]'>
         <Container>
           <Outlet />
         </Container>

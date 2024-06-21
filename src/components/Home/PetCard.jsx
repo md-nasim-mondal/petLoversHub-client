@@ -27,7 +27,7 @@ const PetCard = ({ pet }) => {
             <span className='text-blue-500'>{pet?.petName}</span>
           )}
         </h4>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center flex-wrap'>
           <p className='mb-1 font-medium text-gray-700 dark:text-gray-400'>
             {loading ? (
               <Skeleton width={150} />
@@ -49,7 +49,7 @@ const PetCard = ({ pet }) => {
             )}
           </p>
         </div>
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center flex-wrap'>
           <p className='text-teal-500'>
             {loading ? (
               <Skeleton width={100} />

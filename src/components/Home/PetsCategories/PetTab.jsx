@@ -20,8 +20,8 @@ const PetTab = ({pets}) => {
         modules={[Pagination]}
         className='mySwiper'>
         <SwiperSlide>
-          <div className='grid md:grid-cols-3 xl:grid-cols-4 gap-10'>
-            {pets.map((pet) => (
+          <div className='grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10'>
+            {pets.slice(0,8).map((pet) => (
               <PetCard key={pet._id} pet={pet}></PetCard>
             ))}
           </div>

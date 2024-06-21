@@ -93,22 +93,22 @@ const Banner = () => {
           {slides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div
-                className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 mt-6 md:mb-16 md:mt-8'
+                className='bg-cover bg-center h-[550px] lg:min-h-[660px] xl:min-h-[720px] rounded-xl md:rounded-3xl bg-no-repeat w-[94%] md:w-full mx-auto mb-12 md:mb-16 md:mt-8'
                 style={{
-                  backgroundImage: `url(${slide.image})`,
+                  backgroundImage: `url(${slide?.image})`,
                 }}>
-                <div className='flex items-center justify-center w-full h-full bg-gray-900/40'>
+                <div className='flex items-center justify-center w-full h-full bg-gray-900/40 rounded-xl md:rounded-3xl'>
                   <div className='text-center w-[90%] lg:w-[80%]'>
                     <h1 className='text-3xl font-semibold text-white lg:text-4xl'>
-                      {slide.title}
+                      {slide?.title}
                     </h1>
                     <p className='mb-5 font-medium text-white'>
-                      {slide.description}
+                      {slide?.description}
                     </p>
                     <Link
-                      to={slide.linkTo}
+                      to={slide?.linkTo}
                       className='w-full px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md md:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500'>
-                      {slide.linkText}
+                      {slide?.linkText}
                     </Link>
                   </div>
                 </div>
