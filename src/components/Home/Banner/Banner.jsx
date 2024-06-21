@@ -107,8 +107,10 @@ const Banner = () => {
                     </p>
                     <Link
                       to={slide?.linkTo}
-                      className='w-full px-5 py-2 mt-4 text-sm font-medium text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md md:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500'>
-                      {slide?.linkText}
+                      className='relative inline-flex items-center justify-center mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white'>
+                      <span className='relative px-5 py-2.5 transition-all ease-in duration-75 bg-blue-200  rounded-md group-hover:bg-opacity-0'>
+                        {slide?.linkText}
+                      </span>
                     </Link>
                   </div>
                 </div>

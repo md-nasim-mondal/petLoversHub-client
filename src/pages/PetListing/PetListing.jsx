@@ -6,13 +6,14 @@ import { useInView } from "react-intersection-observer";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import PetCard from "../../components/Home/PetCard";
+import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 
 const PetListing = () => {
   const axiosCommon = useAxiosCommon();
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const { ref, inView } = useInView();
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(8);
 
   const fetchPets = async ({ pageParam = 0 }) => {
     const { data } = await axiosCommon.get(`/available-pets`, {
@@ -58,9 +59,10 @@ const PetListing = () => {
       <Helmet>
         <title>PetLoversHub || Pet-Listing</title>
       </Helmet>
-      <h3 className='text-3xl mb-4 text-center dark:text-white font-bold'>
-        Here is the List of Available Pet for Adopting
-      </h3>
+      <SectionTitle
+        title='Find Your Perfect Pet'
+        description='Discover your ideal furry, feathered, or scaly companion on our Pet Listing page. Browse a wide variety of pets available for adoption, complete with detailed profiles, photos, and essential information to help you make the best choice for your new family member.'
+      />
       <div className='flex flex-col gap-5 md:gap-0 my-6 md:my-12 md:flex-row items-center justify-center'>
         <input
           type='text'

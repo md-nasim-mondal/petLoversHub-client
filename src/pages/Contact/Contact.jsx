@@ -17,6 +17,7 @@ import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 
 const Contact = () => {
   const { loading } = useAuth();
@@ -78,10 +79,14 @@ const Contact = () => {
   };
 
   return (
-    <div className='w-[94%] md:w-full mx-auto mb-12 py-16 lg:py-32 md:min-h-[60vh] bg-cover bg-center bg-no-repeat bg-opacity-60 shadow-lg my-12 rounded-3xl'>
+    <div className='w-[94%] md:w-full mx-auto mb-12 md:min-h-[60vh] bg-cover bg-center bg-no-repeat bg-opacity-60 shadow-lg my-12 rounded-3xl'>
       <Helmet>
         <title>PetLoversHub || Contact</title>
       </Helmet>
+      <SectionTitle
+        title='Get in Touch with Us'
+        description="Have questions or need assistance? Reach out to the PetLoversHub team! Whether you're looking for adoption advice, want to learn more about our services, or need support with your account, we're here to help. Contact us via phone, email, or our online form, and we'll respond promptly to ensure you have the best experience."
+      />
       <h1
         className={`${
           shouldAnimate ? "animate__animated animate__backInDown" : ""

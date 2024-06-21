@@ -9,6 +9,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import TanStackTable from "../../../../components/Dashboard/Table/TanStackTable";
 import { Helmet } from "react-helmet-async";
+import SectionTitle from "../../../../components/Shared/SectionTitle/SectionTitle";
 
 const MyAddedPets = () => {
   const { user, loading } = useAuth();
@@ -211,13 +212,10 @@ const MyAddedPets = () => {
       <Helmet>
         <title>PetLoversHub || My Added Pets</title>
       </Helmet>
-      <h1 className='text-2xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
-        {isLoading || loading ? (
-          <Skeleton width={300} />
-        ) : (
-          `List Of Pets (Added by ${user?.displayName})`
-        )}
-      </h1>
+      <SectionTitle
+        title={`${user?.displayName} Added Pets`}
+        description="Keep track of the pets you've added for adoption in one place. Monitor their status, update their profiles, and view interested adopters. Stay informed and involved in their journey to finding a forever home."
+      />
       <div>
         <TanStackTable data={data} columns={columns} />
       </div>

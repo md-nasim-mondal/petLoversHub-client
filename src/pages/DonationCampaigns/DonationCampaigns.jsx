@@ -7,11 +7,12 @@ import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { format } from "date-fns";
+import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
 
 const DonationCampaigns = () => {
   const axiosCommon = useAxiosCommon();
   const { ref, inView } = useInView();
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(8);
 
   const fetchCampaigns = async ({ pageParam = 0 }) => {
     const { data } = await axiosCommon.get(`/donation-campaigns`, {
@@ -57,9 +58,10 @@ const DonationCampaigns = () => {
       <Helmet>
         <title>PetLoversHub | Donation-Campaigns</title>
       </Helmet>
-      <h3 className='text-3xl mb-4 text-center dark:text-white font-bold'>
-        All Available Campaigns Here
-      </h3>
+      <SectionTitle
+        title='Support Our Donation Campaigns'
+        description='Join our mission to provide loving homes for pets in need. Contribute to our donation campaigns to help fund essential medical care, food, and shelter for rescued animals. Your generosity makes a world of difference in their lives.'
+      />
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 justify-around w-full'>
         {isLoading
           ? renderSkeletons(10) // Render 10 skeletons initially
@@ -91,7 +93,7 @@ const DonationCampaigns = () => {
                           {campaign?.donatedAmount} $
                         </span>
                       </p>
-                      <h3 className="dark:text-white">
+                      <h3 className='dark:text-white'>
                         <span>PostedAt:</span>{" "}
                         {format(new Date(campaign?.createdAt), "MMMM dd, yyyy")}
                       </h3>

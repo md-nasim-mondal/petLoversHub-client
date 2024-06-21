@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import  PropTypes  from "prop-types";
-const NavItem = ({ address, label, setDropdownVisible }) => {
+import useAuth from "../../../hooks/useAuth";
+const NavItem = ({ address, label}) => {
+  const {setDropdownVisible} = useAuth()
   return (
     <>
       <li>

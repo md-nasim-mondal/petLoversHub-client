@@ -28,6 +28,7 @@ const Navbar = () => {
 
   // handle logout button
   const handleLogout = () => {
+    setDropdownVisible(false);
     logOut()
       .then()
       .catch((err) => {
@@ -40,22 +41,18 @@ const Navbar = () => {
       <NavItem
         address='/'
         label='Home'
-        setDropdownVisible={setDropdownVisible}
       />
       <NavItem
         address='/pet-listing'
         label='Pet Listing'
-        setDropdownVisible={setDropdownVisible}
       />
       <NavItem
         address='/donation-campaigns'
         label='Donation Campaigns'
-        setDropdownVisible={setDropdownVisible}
       />
       <NavItem
         address='/contact'
         label='Contact'
-        setDropdownVisible={setDropdownVisible}
       />
       {!user && (
         <li>
@@ -75,6 +72,7 @@ const Navbar = () => {
         <Link to='/dashboard'>
           <button
             type='button'
+            onClick={() => setDropdownVisible(false)}
             className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-2 py-2.5 text-center me-2 mb-2 ml-4'>
             Dashboard
           </button>
