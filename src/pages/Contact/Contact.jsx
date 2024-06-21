@@ -15,7 +15,8 @@ import "aos/dist/aos.css";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
-AOS.init();
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const Contact = () => {
   const { loading } = useAuth();
@@ -30,8 +31,44 @@ const Contact = () => {
 
   if (loading) {
     return (
-      <div className=' flex mt-16 justify-center'>
-        <span className='loading loading-infinity loading-lg'></span>
+      <div className='w-[94%] md:w-full mx-auto mb-12 py-16 lg:py-32 md:min-h-[60vh] bg-cover bg-center bg-no-repeat bg-opacity-60 shadow-lg my-12 rounded-3xl'>
+        <Helmet>
+          <title>PetLoversHub || Contact</title>
+        </Helmet>
+        <h1 className='text-2xl md:text-5xl flex items-center font-bold text-blue-500'>
+          <IoMdContact className='text-7xl text-blue-600' />
+          <Skeleton width={300} height={40} />
+        </h1>
+        <div className='flex flex-col md:flex-row justify-center gap-8 mt-12'>
+          <div className='flex flex-col w-[94%] mx-auto md:w-[40%] gap-6 border-2 p-6 rounded-lg'>
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={40} />
+            <Skeleton height={100} />
+            <Skeleton width={150} height={40} />
+          </div>
+          <div className='flex flex-col gap-4 items-center md:items-start md:pr-8'>
+            <Skeleton width={300} height={40} />
+            <div className='text-4xl flex gap-4 text-blue-500'>
+              <Skeleton circle height={40} width={40} />
+              <Skeleton circle height={40} width={40} />
+              <Skeleton circle height={40} width={40} />
+              <Skeleton circle height={40} width={40} />
+            </div>
+            <Skeleton width={300} height={40} />
+            <div className='text-4xl flex gap-4 text-blue-500'>
+              <Skeleton circle height={40} width={40} />
+              <Skeleton circle height={40} width={40} />
+              <Skeleton circle height={40} width={40} />
+            </div>
+            <Skeleton width={300} height={40} />
+            <Skeleton width={200} height={40} />
+          </div>
+        </div>
+        <div className="text-center">
+
+        <Skeleton width={300} height={40} className='mt-12' />
+        </div>
       </div>
     );
   }
@@ -41,13 +78,13 @@ const Contact = () => {
   };
 
   return (
-    <div className='w-[94%] md:w-full mx-auto mb-12 py-16 lg:py-32  md:min-h-[60vh] bg-cover bg-center bg-no-repeat bg-opacity-60 shadow-lg my-12 rounded-3xl'>
+    <div className='w-[94%] md:w-full mx-auto mb-12 py-16 lg:py-32 md:min-h-[60vh] bg-cover bg-center bg-no-repeat bg-opacity-60 shadow-lg my-12 rounded-3xl'>
       <Helmet>
         <title>PetLoversHub || Contact</title>
       </Helmet>
       <h1
         className={`${
-          shouldAnimate ? "  animate__animated animate__backInDown" : ""
+          shouldAnimate ? "animate__animated animate__backInDown" : ""
         } text-2xl md:text-5xl flex items-center font-bold text-blue-500`}>
         <IoMdContact className='text-7xl text-blue-600' /> Contact With Us
       </h1>
@@ -83,13 +120,13 @@ const Contact = () => {
         <div className='flex flex-col gap-4 items-center md:items-start md:pr-8'>
           <h3
             className={`${
-              shouldAnimate ? " animate__animated animate__flip " : ""
+              shouldAnimate ? "animate__animated animate__flip" : ""
             } text-3xl dark:text-white`}>
             Visit our social pages
           </h3>
           <div
             className={`${
-              shouldAnimate ? "animate__animated animate__rollIn " : ""
+              shouldAnimate ? "animate__animated animate__rollIn" : ""
             } text-4xl flex gap-4 text-blue-500`}>
             <a href='#'>
               <FaFacebookSquare />

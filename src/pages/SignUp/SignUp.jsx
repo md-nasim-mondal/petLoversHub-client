@@ -1,12 +1,16 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import useAuth from "./../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
 import { imageUpload } from "../../api/utils";
 import { Helmet } from "react-helmet-async";
+import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state || "/";
@@ -17,8 +21,8 @@ const SignUp = () => {
     updateUserProfile,
     setUser,
     loading,
-    setLoading,
   } = useAuth();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -38,10 +42,9 @@ const SignUp = () => {
     }
 
     try {
-      setLoading(true);
+      setIsLoading(true);
       // 1. Upload image and get image url
       const image_url = await imageUpload(image);
-      // console.log(image_url)
 
       // 2. User Registration
       const result = await createUser(email, password);
@@ -54,41 +57,64 @@ const SignUp = () => {
       navigate(from);
       toast.success("SignUp Successful!!");
     } catch (err) {
-      // console.log(err);
       toast.error(err.message);
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   // handle google signIn
   const handleGoogleSignIn = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       await signInWithGoogle();
-
       navigate(from);
       toast.success("LogIn Successful With Google");
     } catch (err) {
-      console.log(err);
       toast.error(err.message);
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   // handle github signIn
   const handleGithubSignIn = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       await signInWithGitHub();
-
       navigate(from);
       toast.success("LogIn Successful With Github");
     } catch (err) {
-      // console.log(err);
       toast.error(err.message);
-      setLoading(false);
+      setIsLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className='flex justify-center items-center min-h-[80vh] bg-gray-100 dark:bg-gray-900'>
+        <Helmet>
+          <title>PetLoversHub | Register</title>
+        </Helmet>
+        <div className='flex flex-col justify-center items-center w-full max-w-3xl p-6 rounded-md sm:p-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-lg'>
+          <Skeleton height={40} width={200} className='mb-4' />
+          <Skeleton height={20} width={300} className='mb-4' />
+          <div className='space-y-4'>
+            <Skeleton height={40} className='mb-2' />
+            <Skeleton height={40} className='mb-2' />
+            <Skeleton height={40} className='mb-4' />
+            <Skeleton height={40} width={150} />
+          </div>
+          <div className='flex items-center pt-4 space-x-1'>
+            <Skeleton height={2} width={50} />
+            <Skeleton height={20} width={150} />
+            <Skeleton height={2} width={50} />
+          </div>
+          <Skeleton height={40} className='mb-4' />
+          <Skeleton height={40} />
+          <Skeleton height={20} width={250} className='mt-4' />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className='flex justify-center items-start py-12 md:py-20 min-h-[90vh] bg-gray-100 dark:bg-gray-900'>
@@ -162,10 +188,10 @@ const SignUp = () => {
             </div>
             <div>
               <button
-                disabled={loading}
+                disabled={isLoading}
                 type='submit'
                 className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 w-full'>
-                {loading ? (
+                {isLoading ? (
                   <TbFidgetSpinner className='animate-spin m-auto' />
                 ) : (
                   "Continue"
@@ -182,7 +208,7 @@ const SignUp = () => {
           <div className='flex-1 h-px sm:w-16 bg-gray-300 dark:bg-gray-700'></div>
         </div>
         <button
-          disabled={loading}
+          disabled={isLoading}
           type='button'
           onClick={handleGoogleSignIn}
           className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 dark:border-gray-700 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600'>
@@ -190,7 +216,7 @@ const SignUp = () => {
           <p>Continue with Google</p>
         </button>
         <button
-          disabled={loading}
+          disabled={isLoading}
           type='button'
           onClick={handleGithubSignIn}
           className='disabled:cursor-not-allowed flex justify-center items-center space-x-2 border m-3 p-2 md:p-3 border-gray-300 dark:border-gray-700 rounded-md cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600'>

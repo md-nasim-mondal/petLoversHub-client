@@ -1,6 +1,6 @@
-import { Helmet } from 'react-helmet-async'
-import Banner from '../../components/Home/Banner/Banner'
-import PetsCategory from '../../components/Home/PetsCategory/PetsCategory'
+import { Helmet } from "react-helmet-async";
+import Banner from "../../components/Home/Banner/Banner";
+import PetsCategories from "../../components/Home/PetsCategories/PetsCategories";
 
 const Home = () => {
   return (
@@ -9,9 +9,9 @@ const Home = () => {
         <title>PetLoversHub | Home</title>
       </Helmet>
       <Banner />
-      <PetsCategory/>
+      <PetsCategories />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
