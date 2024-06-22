@@ -1,7 +1,24 @@
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css"; // Import the CSS for the skeleton
 import pic from "../../../assets/images/callToActionPetCard.jpg";
+import useAuth from "../../../hooks/useAuth";
 
 const CallToAction = () => {
+  const { loading } = useAuth();
+
+  if (loading) {
+    return (
+      <section className='relative h-96 bg-cover bg-center rounded-t-xl'>
+        <div className='absolute inset-0 bg-black bg-opacity-40 dark:bg-opacity-60 flex flex-col items-center justify-center text-center p-8 rounded-t-xl'>
+          <Skeleton height={40} width={300} className='mb-4' />
+          <Skeleton count={3} height={20} width={400} className='mb-2' />
+          <Skeleton height={40} width={200} />
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       className='relative h-96 bg-cover bg-center rounded-t-xl'

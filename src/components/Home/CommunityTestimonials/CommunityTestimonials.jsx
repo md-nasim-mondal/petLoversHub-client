@@ -1,6 +1,10 @@
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css"; // Import the CSS for the skeleton
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
+import useAuth from "../../../hooks/useAuth";
 
 const CommunityTestimonials = () => {
+  const {loading} = useAuth()
   const testimonials = [
     {
       id: 1,
@@ -46,6 +50,35 @@ const CommunityTestimonials = () => {
     },
   ];
 
+  if (loading) {
+    return (
+      <section className='pb-16 bg-purple-100 dark:bg-gray-800'>
+        <div className='container mx-auto md:px-4 lg:px-0'>
+          <SectionTitle
+            title='Community Testimonials'
+            description='Explore heartfelt testimonials from our community members about their experiences with PetLoversHub. Learn how our platform has connected pets with loving families, fostering bonds that enrich lives. Join our community and share your own story of pet adoption and companionship.'
+          />
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+            {Array(6)
+              .fill(0)
+              .map((_, index) => (
+                <div
+                  key={index}
+                  className='bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg dark:text-white'>
+                  <Skeleton count={3} height={20} className='mb-2' />
+                  <Skeleton height={20} width={100} className='mb-1' />
+                  <Skeleton height={20} width={150} />
+                </div>
+              ))}
+          </div>
+          <div className='mt-6 text-center'>
+            <Skeleton height={40} width={200} />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className='pb-16 bg-purple-100 dark:bg-gray-800'>
       <div className='container mx-auto md:px-4 lg:px-0'>
@@ -56,7 +89,7 @@ const CommunityTestimonials = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
           {testimonials.map((testimonial, index) => (
             <div
-              key={index + 1}
+              key={index}
               className='bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg dark:text-white'>
               <p className='text-lg mb-4'>{testimonial?.testimonial}</p>
               <p className='text-sm font-bold'>{testimonial?.name}</p>
@@ -65,7 +98,7 @@ const CommunityTestimonials = () => {
           ))}
         </div>
         <div className='mt-6 text-center'>
-          <button className='text-black dark:text-white hover:bg-blue-500  hover:dark:text-black font-medium rounded-lg py-3 px-8 text-center inline-block transition duration-300 ease-in-out border border-blue-600'>
+          <button className='text-black dark:text-white hover:bg-blue-500 hover:dark:text-black font-medium rounded-lg py-3 px-8 text-center inline-block transition duration-300 ease-in-out border border-blue-600'>
             See More
           </button>
         </div>
