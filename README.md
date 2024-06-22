@@ -21,7 +21,7 @@ Welcome to PetLoversHub! This platform aims to create a user-friendly interface 
     - Profile picture dropdown with links to dashboard and logout
 
 2. **Banner Section**:
-    - Normal banner or slider
+    - Normal slider
 
 3. **Pets Category Section**:
     - Buttons/cards/links for pet categories: Cats, Dogs, Rabbits, Fish, etc.
@@ -133,7 +133,7 @@ Welcome to PetLoversHub! This platform aims to create a user-friendly interface 
 2. **Admin Email**:
 3. **Admin Password**:
 4. **Front-end Live Site Link**: [PetLoversHub](https://pet-lovers-hub.netlify.app)
-5. **Client-Side GitHub Repository Link**: [Client Repo](https://github.com/programming-hero-web-course1/b9a12-server-side-nasim-programmer24)
+5. **Client-Side GitHub Repository Link**: [Client Repo](https://github.com/programming-hero-web-course1/b9a12-client-side-nasim-programmer24)
 6. **Server-Side GitHub Repository Link**: [Server Repo](https://github.com/programming-hero-web-course1/b9a12-server-side-nasim-programmer24)
 
 Join us in our mission to unite pets with their forever families!
