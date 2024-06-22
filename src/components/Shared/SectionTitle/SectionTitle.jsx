@@ -13,13 +13,13 @@ const SectionTitle = ({ title = "", description = "" }) => {
           <Skeleton
             height={40}
             width={`100%`}
-            className='mt-12 md:mt-16 mb-6'
+            className='pt-12 pb-6'
           />
           <Skeleton count={2} width={`100%`} className='mb-10' />
         </>
       ) : (
         <>
-          <h1 className='text-2xl md:text-3xl xl:text-4xl dark:text-white text-center font-bold mt-12 md:mt-16 mb-6'>
+          <h1 className='text-2xl md:text-3xl xl:text-4xl dark:text-white text-center font-bold pt-12 pb-6'>
             {title}
           </h1>
           <p className='text-center dark:text-white text-base md:text-lg mb-10'>

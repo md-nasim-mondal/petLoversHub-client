@@ -3,8 +3,8 @@ import Banner from "../../components/Home/Banner/Banner";
 import PetsCategories from "../../components/Home/PetsCategories/PetsCategories";
 import CallToAction from "../../components/Home/CallToAction/CallToAction";
 import AboutUs from "../../components/Home/AboutUs/AboutUs";
-import SuccessStories from "../../components/Home/SuccessStories";
 import ResourcesTips from "../../components/Home/ResourcesTips/ResourcesTips";
+import CommunityTestimonials from "../../components/Home/CommunityTestimonials/CommunityTestimonials";
 
 const Home = () => {
   return (
@@ -16,7 +16,8 @@ const Home = () => {
       <PetsCategories />
       <CallToAction />
       <AboutUs />
-      <SuccessStories />
+      <CommunityTestimonials/>
+      {/* <SuccessStories /> */}
       <ResourcesTips/>
     </>
   );

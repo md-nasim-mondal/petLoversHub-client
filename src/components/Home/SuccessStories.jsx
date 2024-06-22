@@ -18,7 +18,7 @@ const SuccessStories = () => {
   ];
 
   return (
-    <section className='py-16 bg-purple-100 dark:bg-gray-800'>
+    <section className='pb-16 bg-green-100 dark:bg-purple-900 dark:bg-opacity-20'>
       <div className='container mx-auto'>
         <SectionTitle
           title='Success Stories'
@@ -28,7 +28,7 @@ const SuccessStories = () => {
           {stories.map((story, index) => (
             <div
               key={index + 1}
-              className='bg-white dark:bg-gray-700 p-4 rounded-lg shadow-lg'>
+              className='bg-white dark:bg-purple-700 dark:bg-opacity-30 p-4 rounded-lg shadow-lg'>
               <div className='flex justify-between'>
                 <img
                   src={story?.beforeImg}

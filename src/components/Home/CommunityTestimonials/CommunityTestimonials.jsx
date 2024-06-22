@@ -1,0 +1,72 @@
+import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
+
+const CommunityTestimonials = () => {
+  const testimonials = [
+    {
+      id: 1,
+      name: "Jane Doe",
+      location: "New York, NY",
+      testimonial:
+        "Adopting from PetLoversHub was the best decision our family made. Our new dog has brought so much joy into our lives!",
+    },
+    {
+      id: 2,
+      name: "John Smith",
+      location: "Los Angeles, CA",
+      testimonial:
+        "We adopted two cats from PetLoversHub, and they quickly became part of our family. Thank you for making the process easy and rewarding.",
+    },
+    {
+      id: 3,
+      name: "Emily Johnson",
+      location: "Chicago, IL",
+      testimonial:
+        "After adopting a kitten from PetLoversHub, our home feels complete. She's brought so much love and laughter into our lives!",
+    },
+    {
+      id: 4,
+      name: "Michael Brown",
+      location: "Houston, TX",
+      testimonial:
+        "We found our perfect match through PetLoversHub—a playful dog who has become our hiking buddy and best friend. Adopting was a breeze!",
+    },
+    {
+      id: 5,
+      name: "Sarah Adams",
+      location: "Miami, FL",
+      testimonial:
+        "PetLoversHub made it easy to find a companion for our elderly cat. They matched us with a calm and loving cat who fits right in.",
+    },
+    {
+      id: 6,
+      name: "David Martinez",
+      location: "Seattle, WA",
+      testimonial:
+        "We couldn't be happier with our decision to adopt a rescue rabbit from PetLoversHub. He's brought so much joy and curiosity into our home.",
+    },
+  ];
+
+  return (
+    <section className='pb-16 bg-purple-100 dark:bg-gray-800'>
+      <div className='container mx-auto md:px-4 lg:px-0'>
+        <SectionTitle
+          title='Community Testimonials'
+          description='Explore heartfelt testimonials from our community members about their experiences with PetLoversHub. Learn how our platform has connected pets with loving families, fostering bonds that enrich lives. Join our community and share your own story of pet adoption and companionship.'
+        />
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index + 1}
+              className='bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg dark:text-white'>
+              <p className='text-lg mb-4'>{testimonial?.testimonial}</p>
+              <p className='text-sm font-bold'>{testimonial?.name}</p>
+              <p className='text-sm'>{testimonial?.location}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default CommunityTestimonials;
