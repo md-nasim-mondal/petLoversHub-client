@@ -9,7 +9,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const Login = () => {
-  const { loading } = useAuth();
+  const { loading, setLoading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,8 +30,10 @@ const Login = () => {
       navigate(from);
       toast.success("SignIn Successful");
       setIsLoading(false);
+      setLoading(false);
     } catch (err) {
       toast.error(err.message);
+      setLoading(false);
       setIsLoading(false);
     }
   };
@@ -48,9 +50,11 @@ const Login = () => {
         "Request Success! Check your email for further process.........."
       );
       setIsLoading(false);
+      setLoading(false);
     } catch (err) {
       toast.error(err.message);
       setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -61,8 +65,10 @@ const Login = () => {
       navigate(from);
       toast.success("LogIn Successful With Google");
       setIsLoading(false);
+      setLoading(false);
     } catch (err) {
       toast.error(err.message);
+      setLoading(false);
       setIsLoading(false);
     }
   };
@@ -76,6 +82,7 @@ const Login = () => {
       setIsLoading(false);
     } catch (err) {
       toast.error(err.message);
+      setLoading(false);
       setIsLoading(false);
     }
   };
@@ -84,7 +91,7 @@ const Login = () => {
     return (
       <div className='flex justify-center items-center min-h-[80vh] bg-gray-100 dark:bg-gray-900'>
         <Helmet>
-          <title>PetLoversHub | Login</title>
+          <title>PetLoversHub || Login</title>
         </Helmet>
         <div className='flex flex-col w-full max-w-xl p-6 rounded-md sm:p-10 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-lg'>
           <Skeleton height={40} width={200} className='mb-4' />

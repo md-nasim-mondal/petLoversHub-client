@@ -21,6 +21,7 @@ const SignUp = () => {
     updateUserProfile,
     setUser,
     loading,
+    setLoading,
   } = useAuth();
 
   const handleSubmit = async (e) => {
@@ -56,8 +57,11 @@ const SignUp = () => {
 
       navigate(from);
       toast.success("SignUp Successful!!");
+      setLoading(false);
+      setIsLoading(false);
     } catch (err) {
       toast.error(err.message);
+      setLoading(false);
       setIsLoading(false);
     }
   };
@@ -69,8 +73,11 @@ const SignUp = () => {
       await signInWithGoogle();
       navigate(from);
       toast.success("LogIn Successful With Google");
+      setLoading(false);
+      setIsLoading(false);
     } catch (err) {
       toast.error(err.message);
+      setLoading(false);
       setIsLoading(false);
     }
   };
@@ -82,8 +89,11 @@ const SignUp = () => {
       await signInWithGitHub();
       navigate(from);
       toast.success("LogIn Successful With Github");
+      setLoading(false);
+      setIsLoading(false);
     } catch (err) {
       toast.error(err.message);
+      setLoading(false);
       setIsLoading(false);
     }
   };
