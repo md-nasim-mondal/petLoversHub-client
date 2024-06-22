@@ -1,4 +1,4 @@
-import  { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../../../../components/Shared/SectionTitle/SectionTitle";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -9,10 +9,12 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const MyDonations = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     data: payments = [],
@@ -38,10 +40,12 @@ const MyDonations = () => {
     onSuccess: () => {
       refetch();
       toast.success("Successfully Sent Refund Request!!");
+      setIsLoading(false);
     },
   });
 
   const handleRefund = (paymentInfo) => {
+    setIsLoading(true);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -55,8 +59,11 @@ const MyDonations = () => {
         try {
           await refundHandle(paymentInfo);
         } catch (err) {
-          toast.error(err.message);
+          toast.error(err?.message);
+          setIsLoading(false);
         }
+      } else {
+        setIsLoading(false)
       }
     });
   };
@@ -103,7 +110,7 @@ const MyDonations = () => {
       cell: ({ row }) => (
         <div className='space-x-2 flex justify-center'>
           <button
-            disabled={row?.original?.refund}
+            disabled={row?.original?.refund || isLoading}
             onClick={() => {
               handleRefund(row?.original);
             }}
@@ -112,9 +119,15 @@ const MyDonations = () => {
                 ? "bg-gray-400 dark:bg-gray-700 text-white"
                 : "bg-rose-400 text-white"
             } px-2 py-1 rounded font-semibold`}>
-            {row?.original?.refund
-              ? "You Already Asked For Refund"
-              : "Ask For Refund"}
+            {isLoading ? (
+              <TbFidgetSpinner className='animate-spin m-auto' />
+            ) : (
+              <>
+                {row?.original?.refund
+                  ? "You Already Asked For Refund"
+                  : "Ask For Refund"}
+              </>
+            )}
           </button>
         </div>
       ),
