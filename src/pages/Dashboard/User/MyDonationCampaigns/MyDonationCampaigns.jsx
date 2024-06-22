@@ -79,7 +79,7 @@ const MyDonationCampaigns = () => {
     setShowDonators(false);
     setSelectedCampaign(null);
   };
-  
+
   if (!campaigns.length) {
     return (
       <h1 className='text-3xl dark:text-white md:text-4xl font-bold my-6 md:my-12 text-center'>
@@ -148,7 +148,9 @@ const MyDonationCampaigns = () => {
                   </td>
                   <td className='border px-4 py-2 text-center'>
                     <button
-                      className='text-white bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900'
+                      className={`text-white ${
+                        campaign?.pauseStatus && "bg-green-400"
+                      } bg-yellow-400 hover:bg-yellow-500 font-medium rounded-lg text-sm px-5 py-0 md:py-2.5 me-2 mb-2`}
                       onClick={() => {
                         handlePause(campaign?._id);
                         setPauseStatus(campaign?.pauseStatus);
@@ -202,7 +204,9 @@ const MyDonationCampaigns = () => {
                 {selectedCampaign.donators?.map((donator, index) => (
                   <tr key={index}>
                     <td className='border px-4 py-2'>{donator?.name}</td>
-                    <td className='border px-4 py-2'>{donator?.amount}</td>
+                    <td className='border px-4 py-2'>
+                      {donator?.donatedAmount} $
+                    </td>
                   </tr>
                 ))}
               </tbody>

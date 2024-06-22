@@ -44,24 +44,24 @@ const UserDataRow = ({ user, refetch }) => {
     }
   };
   return (
-    <tr>
-      <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm text-left'>
-        <p className='text-gray-900 whitespace-no-wrap'>{user?.name}</p>
+    <tr className='bg-white dark:bg-gray-800'>
+      <td className='px-5 py-3 border border-gray-200 text-sm text-gray-900 dark:text-gray-200'>
+        <p className='whitespace-no-wrap'>{user?.name}</p>
       </td>
-      <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm text-left'>
-        <p className='text-gray-900 whitespace-no-wrap'>{user?.email}</p>
+      <td className='px-5 py-3 border border-gray-200 text-sm text-gray-900 dark:text-gray-200'>
+        <p className='whitespace-no-wrap'>{user?.email}</p>
       </td>
-      <td className='flex justify-center items-center px-5 py-3  border-b border-gray-200 bg-white '>
+      <td className='flex justify-center items-center px-5 py-3 border border-gray-200'>
         <img src={user?.photo} className='w-20 h-20 rounded-full' alt='' />
       </td>
-      <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm text-left'>
-        <p className='text-gray-900 whitespace-no-wrap'>{user?.role}</p>
+      <td className='px-5 py-3 border border-gray-200 text-sm text-gray-900 dark:text-gray-200'>
+        <p className='whitespace-no-wrap'>{user?.role}</p>
       </td>
-      <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm text-left'>
+      <td className='px-5 py-3 border border-gray-200 text-sm text-left'>
         {user?.status ? (
           <p
             className={`${
-              user.status === "Verified" ? "text-green-500" : "text-yellow-500"
+              user.status === 'Verified' ? 'text-green-500' : 'text-yellow-500'
             } whitespace-no-wrap`}>
             {user.status}
           </p>
@@ -69,14 +69,13 @@ const UserDataRow = ({ user, refetch }) => {
           <p className='text-red-500 whitespace-no-wrap'>Unavailable</p>
         )}
       </td>
-
-      <td className='px-5 py-3 border-b border-gray-200 bg-white text-sm text-left'>
+      <td className='px-5 py-3 border border-gray-200 text-sm text-left'>
         <button
           onClick={() => setIsOpen(true)}
-          className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight'>
+          className='relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 dark:text-white leading-tight'>
           <span
             aria-hidden='true'
-            className='absolute inset-0 bg-green-200 opacity-50 rounded-full'></span>
+            className='absolute inset-0 bg-green-200 dark:bg-green-600 opacity-50 dark:opacity-75 rounded-full'></span>
           <span className='relative'>Update Role</span>
         </button>
         {/* Update User Modal */}

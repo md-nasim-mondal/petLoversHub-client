@@ -46,22 +46,22 @@ const Users = () => {
 
   const renderHeaderSkeletons = () => (
     <tr>
-      <th className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+      <th className='p-3 bg-white border border-gray-200 text-gray-800 text-center text-sm uppercase font-normal'>
         <Skeleton height={25} width={100} />
       </th>
-      <th className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+      <th className='p-3 bg-white border border-gray-200 text-gray-800 text-center text-sm uppercase font-normal'>
         <Skeleton height={25} width={100} />
       </th>
-      <th className='p-3 text-center bg-white border-y border-gray-200 text-sm uppercase font-normal'>
+      <th className='p-3 text-center bg-white border border-gray-200 text-sm uppercase font-normal'>
         <Skeleton height={25} width={100} />
       </th>
-      <th className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+      <th className='p-3 bg-white border border-gray-200 text-gray-800 text-center text-sm uppercase font-normal'>
         <Skeleton height={25} width={100} />
       </th>
-      <th className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+      <th className='p-3 bg-white border border-gray-200 text-gray-800 text-center text-sm uppercase font-normal'>
         <Skeleton height={25} width={100} />
       </th>
-      <th className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+      <th className='p-3 bg-white border border-gray-200 text-gray-800 text-center text-sm uppercase font-normal'>
         <Skeleton height={25} width={100} />
       </th>
     </tr>
@@ -72,46 +72,46 @@ const Users = () => {
       <Helmet>
         <title>PetLoversHub || Users</title>
       </Helmet>
-      <h3 className='text-2xl md:text-3xl text-center font-bold dark:text-white'>
+      <h3 className='text-2xl md:text-3xl text-center font-bold text-gray-900 dark:text-gray-100'>
         List All Users of PetLoversHub
       </h3>
       <div className='py-8'>
         <div className='-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 w-full text-center overflow-x-auto'>
           <div className='inline-block mx-auto shadow rounded-lg overflow-hidden'>
-            <table className='w-full leading-normal'>
+            <table className='w-full leading-normal dark:border dark:shadow-xl'>
               <thead>
                 {isLoading ? (
                   renderHeaderSkeletons()
                 ) : (
-                  <tr>
+                  <tr className='bg-gray-200 dark:bg-gray-800'>
                     <th
                       scope='col'
-                      className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+                      className='p-3 bg-gray-300 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-center text-sm uppercase font-normal'>
                       Name
                     </th>
                     <th
                       scope='col'
-                      className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+                      className='p-3 bg-gray-300 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-center text-sm uppercase font-normal'>
                       Email
                     </th>
                     <th
                       scope='col'
-                      className='p-3 text-center bg-white border-y border-gray-200 text-sm uppercase font-normal'>
+                      className='p-3 text-center bg-gray-300 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-sm uppercase font-normal'>
                       Profile Picture
                     </th>
                     <th
                       scope='col'
-                      className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+                      className='p-3 bg-gray-300 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-center text-sm uppercase font-normal'>
                       Role
                     </th>
                     <th
                       scope='col'
-                      className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+                      className='p-3 bg-gray-300 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-center text-sm uppercase font-normal'>
                       Status
                     </th>
                     <th
                       scope='col'
-                      className='p-3 bg-white border-y border-gray-200 text-gray-800 text-left text-sm uppercase font-normal'>
+                      className='p-3 bg-gray-300 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-200 text-center text-sm uppercase font-normal'>
                       Action
                     </th>
                   </tr>
@@ -135,5 +135,6 @@ const Users = () => {
     </div>
   );
 };
+
 
 export default Users;

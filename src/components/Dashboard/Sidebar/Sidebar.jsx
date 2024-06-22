@@ -12,12 +12,11 @@ import useRole from "../../../hooks/useRole";
 import UserMenu from "./Menu/UserMenu";
 import AdminMenu from "./Menu/AdminMenu";
 import ToggleBtn from "../../Shared/Button/ToggleBtn";
-import PropTypes from "prop-types";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
-  const { logOut, loading } = useAuth();
+const Sidebar = () => {
+  const { logOut, loading, isDrawerOpen, setDrawerOpen } = useAuth();
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(() => {
     const savedToggleState = localStorage.getItem("sidebarToggle");
@@ -156,9 +155,5 @@ const Sidebar = ({ isDrawerOpen, setDrawerOpen }) => {
   );
 };
 
-Sidebar.propTypes = {
-  isDrawerOpen: PropTypes.bool,
-  setDrawerOpen: PropTypes.func,
-};
 
 export default Sidebar;

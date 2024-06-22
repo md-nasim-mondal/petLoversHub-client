@@ -22,6 +22,7 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
 
@@ -97,7 +98,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         getToken(currentUser.email);
         saveUser(currentUser);
-        setLoading(false)
+        setLoading(false);
       }
       setLoading(false);
     });
@@ -122,6 +123,8 @@ const AuthProvider = ({ children }) => {
     setDropdownVisible,
     menuVisible,
     setMenuVisible,
+    isDrawerOpen,
+    setDrawerOpen,
   };
 
   return (
