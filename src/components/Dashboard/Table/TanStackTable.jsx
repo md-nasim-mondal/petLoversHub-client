@@ -8,8 +8,12 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import useAuth from "../../../hooks/useAuth";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const TanStackTable = ({ data, columns }) => {
+  const { loading } = useAuth();
   const [sorting, setSorting] = useState([]);
   const [filtering, setFiltering] = useState("");
 
@@ -28,6 +32,35 @@ const TanStackTable = ({ data, columns }) => {
     onGlobalFilterChange: setFiltering,
   });
 
+  const renderSkeleton = () => {
+    const headers = columns.map((col) => (
+      <th key={col.accessorKey} className='text-center px-3 py-6 border'>
+        <Skeleton height={20} />
+      </th>
+    ));
+
+    const rows = Array.from({ length: 5 }).map((_, index) => (
+      <tr key={index} className='border-b'>
+        {columns.map((col) => (
+          <td
+            key={col.accessorKey}
+            className='text-center w-auto border px-3 py-1'>
+            <Skeleton height={20} />
+          </td>
+        ))}
+      </tr>
+    ));
+
+    return (
+      <table className='w-full md:w-3/4 dark:text-white'>
+        <thead>
+          <tr className='border-2'>{headers}</tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    );
+  };
+
   return (
     <div className='text-center'>
       <div className='flex flex-col md:flex-row justify-center items-center gap-1 md:gap-4'>
@@ -41,48 +74,55 @@ const TanStackTable = ({ data, columns }) => {
         <p className='dark:text-white font-semibold'>You can Search Here</p>
       </div>
       <div className='overflow-x-auto md:flex justify-center'>
-        <table className='w-full md:w-3/4 dark:text-white'>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr className='border-2' key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th
-                    key={header.id}
-                    className='text-center cursor-pointer px-3 py-6 border'
-                    onClick={header.column.getToggleSortingHandler()}>
-                    {header.isPlaceholder ? null : (
-                      <div className='flex items-center justify-center'>
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                        {
-                          { asc: "🔼", desc: "🔽" }[
-                            header.column.getIsSorted() ?? null
-                          ]
-                        }
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr className='border-b' key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td className='text-center w-auto border px-3 py-1' key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {loading ? (
+          renderSkeleton()
+        ) : (
+          <table className='w-full md:w-3/4 dark:text-white'>
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr className='border-2' key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th
+                      key={header.id}
+                      className='text-center cursor-pointer px-3 py-6 border'
+                      onClick={header.column.getToggleSortingHandler()}>
+                      {header.isPlaceholder ? null : (
+                        <div className='flex items-center justify-center'>
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                          {
+                            { asc: "🔼", desc: "🔽" }[
+                              header.column.getIsSorted() ?? null
+                            ]
+                          }
+                        </div>
+                      )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr className='border-b' key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      className='text-center w-auto border px-3 py-1'
+                      key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
-
       {table.getPageCount() > 1 && (
         <div className='lg:w-1/4 flex justify-between items-center mt-4 mx-auto'>
           <button
