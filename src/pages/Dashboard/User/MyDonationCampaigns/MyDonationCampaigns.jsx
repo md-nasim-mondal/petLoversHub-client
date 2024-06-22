@@ -23,7 +23,7 @@ const MyDonationCampaigns = () => {
     isLoading: isCampaignsLoading,
   } = useQuery({
     queryKey: ["campaigns", user?.email],
-    enabled: !loading && !!user?.email,
+    enabled:  !!user?.email,
     queryFn: async () => {
       if (user?.email) {
         const { data } = await axiosSecure.get(

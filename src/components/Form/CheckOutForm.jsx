@@ -111,7 +111,9 @@ const CheckoutForm = ({ closeModal, donateInfo, refetch }) => {
         ...donateInfo?.donator,
         donatedAmount: donateInfo?.donator?.donateAmount,
         donatedDate: new Date().toISOString(),
+        transactionId: paymentIntent.id,
       };
+      delete newDonator?.donateAmount;
       const updateCampaignData = {
         donators: [...donators, newDonator],
         donatedAmount: updateDonatedAmount,
@@ -124,7 +126,7 @@ const CheckoutForm = ({ closeModal, donateInfo, refetch }) => {
         await axiosSecure.post(`/donates`, donateInfoData);
         // 3. change room status to booked in db
         await axiosSecure.put(
-          `/update-donateInfo-campaign/${donateInfo._id}`,
+          `/update-donateInfo-campaign/${donateInfo?._id}`,
           updateCampaignData
         );
 

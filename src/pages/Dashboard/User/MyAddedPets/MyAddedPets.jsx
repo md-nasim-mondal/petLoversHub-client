@@ -21,7 +21,7 @@ const MyAddedPets = () => {
     isLoading,
   } = useQuery({
     queryKey: ["pets", user?.email],
-    enabled: !loading && !!user?.email,
+    enabled: !!user?.email,
     queryFn: async () => {
       if (user?.email) {
         const { data } = await axiosSecure.get(`/pets/${user.email}`);

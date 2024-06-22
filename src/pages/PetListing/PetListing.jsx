@@ -98,10 +98,10 @@ const PetListing = () => {
             ))}
       </div>
       {isFetchingNextPage && (
-        <p className='text-lg md:text-xl my-6'>Loading more pets...</p>
+        <p className='text-lg md:text-xl my-6 dark:text-white'>Loading more pets...</p>
       )}
       {!hasNextPage && (
-        <p className='text-xl text-center md:text-2xl my-6'>
+        <p className='text-xl text-center md:text-2xl my-6 dark:text-white:'>
           No More Pets Card to Show
         </p>
       )}
