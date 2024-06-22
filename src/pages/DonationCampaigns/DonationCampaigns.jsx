@@ -3,11 +3,10 @@ import React, { useState, useEffect } from "react";
 import useAxiosCommon from "../../hooks/useAxiosCommon";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
-import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { format } from "date-fns";
 import SectionTitle from "../../components/Shared/SectionTitle/SectionTitle";
+import CampaignPetCard from "../../components/Shared/CampaignPetCard";
 
 const DonationCampaigns = () => {
   const axiosCommon = useAxiosCommon();
@@ -69,40 +68,7 @@ const DonationCampaigns = () => {
               <React.Fragment key={pageIndex}>
                 {page.campaigns.map((campaign) => (
                   <React.Fragment key={campaign?._id}>
-                    <div className='p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
-                      <img
-                        className='rounded-t-lg h-48 w-full object-cover'
-                        src={campaign?.petImage}
-                        alt={campaign?.petName}
-                      />
-                      <h4 className='mt-4 mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
-                        Pet Name:{" "}
-                        <span className='text-blue-500 dark:text-blue-300'>
-                          {campaign?.petName}
-                        </span>
-                      </h4>
-                      <p className='mb-3 font-medium text-gray-700 dark:text-gray-400'>
-                        Maximum Donation Amount:{" "}
-                        <span className='text-green-500 dark:text-green-300'>
-                          {campaign?.maxDonationAmount} $
-                        </span>
-                      </p>
-                      <p className='mb-3 font-medium text-gray-700 dark:text-gray-400'>
-                        Donated Amount:{" "}
-                        <span className='text-purple-500 dark:text-purple-300'>
-                          {campaign?.donatedAmount} $
-                        </span>
-                      </p>
-                      <h3 className='dark:text-white'>
-                        <span>PostedAt:</span>{" "}
-                        {format(new Date(campaign?.createdAt), "MMMM dd, yyyy")}
-                      </h3>
-                      <Link to={`/campaign-details/${campaign?._id}`}>
-                        <button className='mt-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-lg hover:from-cyan-600 hover:to-blue-600 focus:ring-4 focus:ring-cyan-300 dark:focus:ring-cyan-800'>
-                          View Details
-                        </button>
-                      </Link>
-                    </div>
+                    <CampaignPetCard campaign={campaign}/>
                   </React.Fragment>
                 ))}
               </React.Fragment>

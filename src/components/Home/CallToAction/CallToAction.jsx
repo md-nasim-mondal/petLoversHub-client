@@ -6,7 +6,7 @@ const CallToAction = () => {
     <section
       className='relative h-96 bg-cover bg-center rounded-t-xl'
       style={{ backgroundImage: `url(${pic})` }}>
-      <div className='absolute inset-0 bg-black bg-opacity-60 dark:bg-opacity-80 flex flex-col items-center justify-center text-center p-8 rounded-t-xl'>
+      <div className='absolute inset-0 bg-black bg-opacity-40 dark:bg-opacity-60 flex flex-col items-center justify-center text-center p-8 rounded-t-xl'>
         <h2 className='text-white text-4xl font-bold mb-4 leading-tight'>
           Find Your Perfect Companion
         </h2>
@@ -52,7 +52,7 @@ const CallToAction = () => {
         </ul>
         <Link
           to='/pet-listing'
-          className='text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg py-3 px-8 text-center inline-block transition duration-300 ease-in-out'>
+          className='text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br font-medium rounded-lg py-3 px-8 text-center inline-block transition duration-300 ease-in-out'>
           Start Your Journey
         </Link>
       </div>

@@ -9,6 +9,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import RecommendedDonation from "../../components/RecommendedDonation/RecommendedDonation";
 
 const CampaignDetails = () => {
   const { id } = useParams();
@@ -41,7 +42,7 @@ const CampaignDetails = () => {
   const handleDonateModal = () => {
     const pause = campaign?.pauseStatus;
     if (pause) return toast.error('This Campaign is Pause So You cannot Donate For this pet');
-     setIsDonateModalOpen(true);
+    setIsDonateModalOpen(true);
   };
 
   return (
@@ -53,10 +54,10 @@ const CampaignDetails = () => {
         <Skeleton height={40} width={400} className='mx-auto mt-6' />
       ) : (
         <h3 className='mt-6 text-xl md:text-3xl lg:text-4xl font-bold text-center dark:text-white'>
-          Here is Showing Campaign Details
+          Showing Campaign Details of {campaign?.petName}
         </h3>
       )}
-      <div className='flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-4xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 mx-auto my-12 md:my-24 transition-all duration-300'>
+      <div className='flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-7xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 mx-auto my-12 transition-all duration-300 p-4 md:p-8'>
         {isCampaignLoading || loading ? (
           <Skeleton
             width={320}
@@ -65,7 +66,7 @@ const CampaignDetails = () => {
           />
         ) : (
           <img
-            className='object-cover w-full rounded-t-lg h-96 md:h-auto md:w-80 md:rounded-none md:rounded-s-lg'
+            className='object-cover w-full rounded-t-lg h-96 md:h-[500px] md:w-[40%] md:rounded-none md:rounded-s-lg'
             src={campaign?.petImage}
             alt=''
           />
@@ -150,6 +151,7 @@ const CampaignDetails = () => {
           )}
         </div>
       </div>
+      <RecommendedDonation id={id} />
     </div>
   );
 };

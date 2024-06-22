@@ -79,7 +79,7 @@ const Contact = () => {
   };
 
   return (
-    <div className='w-[94%] md:w-full mx-auto mb-12 md:min-h-[60vh] bg-cover bg-center bg-no-repeat bg-opacity-60 shadow-lg my-12 rounded-3xl'>
+    <div className='w-[94%] md:w-full mx-auto pb-12 md:min-h-[60vh] bg-cover bg-center bg-no-repeat bg-opacity-60 shadow-lg rounded-3xl'>
       <Helmet>
         <title>PetLoversHub || Contact</title>
       </Helmet>
