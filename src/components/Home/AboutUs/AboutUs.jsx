@@ -7,7 +7,7 @@ const AboutUs = () => {
   const { loading } = useAuth();
 
   return (
-    <section className='py-16 bg-gradient-to-r from-green-100 to-blue-100 dark:from-blue-900 dark:to-green-900'>
+    <section className='py-16 px-4 md:px-8 bg-gradient-to-r from-green-100 to-blue-100 dark:from-blue-900 dark:to-green-900'>
       <div className='container mx-auto flex flex-col lg:flex-row items-center'>
         <div className='w-full md:w-3/4 lg:w-1/2 mb-8 md:mb-0'>
           {loading ? (

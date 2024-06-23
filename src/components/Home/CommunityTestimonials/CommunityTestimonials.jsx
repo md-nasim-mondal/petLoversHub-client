@@ -4,7 +4,7 @@ import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import useAuth from "../../../hooks/useAuth";
 
 const CommunityTestimonials = () => {
-  const {loading} = useAuth()
+  const { loading } = useAuth();
   const testimonials = [
     {
       id: 1,
@@ -52,8 +52,8 @@ const CommunityTestimonials = () => {
 
   if (loading) {
     return (
-      <section className='pb-16 bg-purple-100 dark:bg-gray-800'>
-        <div className='container mx-auto md:px-4 lg:px-0'>
+      <section className='pb-16 px-4 lg:px-8 bg-purple-100 dark:bg-gray-800'>
+        <div className='container mx-auto '>
           <SectionTitle
             title='Community Testimonials'
             description='Explore heartfelt testimonials from our community members about their experiences with PetLoversHub. Learn how our platform has connected pets with loving families, fostering bonds that enrich lives. Join our community and share your own story of pet adoption and companionship.'
@@ -81,7 +81,7 @@ const CommunityTestimonials = () => {
 
   return (
     <section className='pb-16 bg-purple-100 dark:bg-gray-800'>
-      <div className='container mx-auto md:px-4 lg:px-0'>
+      <div className='container mx-auto px-4 lg:px-8'>
         <SectionTitle
           title='Community Testimonials'
           description='Explore heartfelt testimonials from our community members about their experiences with PetLoversHub. Learn how our platform has connected pets with loving families, fostering bonds that enrich lives. Join our community and share your own story of pet adoption and companionship.'

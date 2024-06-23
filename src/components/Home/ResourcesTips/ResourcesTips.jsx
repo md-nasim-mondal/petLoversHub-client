@@ -32,7 +32,7 @@ const ResourcesTips = () => {
 
   return (
     <section className='pb-16 bg-blue-50 dark:bg-teal-900 rounded-b-xl'>
-      <div className='container mx-auto md:px-4 lg:px-0'>
+      <div className='container mx-auto px-4 lg:px-8'>
         <SectionTitle
           title='Resources & Tips'
           description='Discover valuable resources and expert tips to enhance your pet adoption journey. From care guides to training advice, our comprehensive resources empower you to provide the best for your new furry friend. Ensure a happy and fulfilling life together with these helpful insights.'
