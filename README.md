@@ -127,53 +127,6 @@ Welcome to PetLoversHub! This platform aims to create a user-friendly interface 
 2. Follow best coding practices.
 3. Write meaningful git commit messages.
 
-## To run this project locally, follow these steps:
-
-1. *Clone the Repository*
-
-2. *Install Dependencies*
-- Navigate to the project directory and install frontend dependencies:
-  
-  npm install
-  
-- For backend dependencies, navigate to the backend directory and run:
-  
-  npm install
-  
-
-3. *Configure Firebase Keys*
-- Add your Firebase configuration keys to a .env.local file in the project root:
-  
-  FIREBASE_API_KEY=<your-api-key>
-  FIREBASE_AUTH_DOMAIN=<your-auth-domain>
-  FIREBASE_PROJECT_ID=<your-project-id>
-  
-
-4. *Start the Backend Server*
-- Use nodemon to start the backend server:
-  
-  nodemon index.js
-  
-- Ensure MongoDB URI, username, and password are set in a .env file in the backend directory:
-  
-  MONGODB_URI=<your-mongodb-uri>
-  DB_USERNAME=<your-db-username>
-  DB_PASSWORD=<your-db-password>
-  
-
-5. *Set Environment Variables*
-- Update .env.local or .env with necessary variables, for example:
-  
-  VITE_API_URL='http://localhost:5000'
-  
-
-6. *Start the Frontend Server*
-
-Follow these steps to clone, configure, and run the project locally.
-localhost
-
-
-
 ## Submission
 
 1. **Assignment Category/variant**:
