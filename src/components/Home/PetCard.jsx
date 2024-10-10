@@ -8,17 +8,17 @@ const PetCard = ({ pet }) => {
   const { loading } = useAuth();
 
   return (
-    <div className='p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+    <div className='md:p-6 bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 max-w-[290px] md:max-w-[350px]'>
       {loading ? (
         <Skeleton height={192} className='rounded-t-lg' />
       ) : (
         <img
-          className='rounded-t-lg h-48 w-full'
+          className='rounded-t-lg min-w-full md:min-w-[300px] md:max-w-[340px] h-48 mx-auto'
           src={pet?.petImage}
           alt={pet?.petName}
         />
       )}
-      <div>
+      <div className="p-4 md:p-0">
         <h4 className='mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
           Name:{" "}
           {loading ? (
@@ -27,8 +27,8 @@ const PetCard = ({ pet }) => {
             <span className='text-blue-500'>{pet?.petName}</span>
           )}
         </h4>
-        <div className='flex justify-between items-center flex-wrap'>
-          <p className='mb-1 font-medium text-gray-700 dark:text-gray-400'>
+        <div className='flex justify-between items-center flex-wrap gap-1'>
+          <p className='mb-1 font-medium text-gray-700 dark:text-gray-400 flex flex-wrap'>
             {loading ? (
               <Skeleton width={150} />
             ) : (
@@ -49,12 +49,14 @@ const PetCard = ({ pet }) => {
             )}
           </p>
         </div>
-        <div className='flex justify-between items-center flex-wrap'>
-          <p className='text-teal-500'>
+        <div className='flex justify-between items-center flex-wrap gap-1 '>
+          <p className='text-teal-500 flex flex-wrap'>
             {loading ? (
               <Skeleton width={100} />
             ) : (
-              `Location: ${pet?.petLocation}`
+              <>
+              Location: <span>{pet?.petLocation}</span>
+              </>
             )}
           </p>
           {loading ? (
@@ -62,7 +64,7 @@ const PetCard = ({ pet }) => {
           ) : (
             <Link
               to={`/pet-details/${pet?._id}`}
-              className='mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600'>
+              className='mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 min-w-fit'>
               View Details
             </Link>
           )}

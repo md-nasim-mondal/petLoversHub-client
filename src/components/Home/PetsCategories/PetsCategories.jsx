@@ -59,7 +59,7 @@ const PetsCategories = () => {
         title='Our Pets Category'
         description='At PetLoversHub, we cater to all your pet adoption needs. Explore categories for dogs, cats, birds, and small animals, along with expert advice, care tips, and resources to ensure a happy, healthy adoption experience.'
       />
-      <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+      <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)} className="space-y-8">
         <TabList>
           <Tab>Cats</Tab>
           <Tab>Birds</Tab>
@@ -88,7 +88,7 @@ const PetsCategories = () => {
           <PetTab pets={others} />
         </TabPanel>
       </Tabs>
-      <div className='text-center my-12'>
+      <div className='text-center py-12'>
         <Link
           to='/pet-listing'
           className='relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white'>

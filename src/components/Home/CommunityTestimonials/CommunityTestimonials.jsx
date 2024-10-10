@@ -98,7 +98,7 @@ const CommunityTestimonials = () => {
           ))}
         </div>
         <div className='mt-6 text-center'>
-          <button className='text-black dark:text-white hover:bg-blue-500 hover:dark:text-black font-medium rounded-lg py-3 px-8 text-center inline-block transition duration-300 ease-in-out border border-blue-600'>
+          <button className='text-black hover:text-white dark:text-white hover:bg-blue-500 hover:dark:text-black font-medium rounded-lg py-3 px-8 text-center inline-block transition duration-300 ease-in-out border border-blue-600'>
             See More
           </button>
         </div>

@@ -84,13 +84,13 @@ const PetListing = () => {
           <option value='Other'>Other</option>
         </select>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 justify-around w-full'>
+      <div className='flex flex-wrap gap-8 justify-center md:justify-evenly w-full'>
         {isLoading
           ? renderSkeletons(10) // Render 10 skeletons initially
-          : data?.pages.map((page, pageIndex) => (
+          : data?.pages?.map((page, pageIndex) => (
               <React.Fragment key={pageIndex}>
-                {page.pets.map((pet) => (
-                  <React.Fragment key={pet._id}>
+                {page?.pets?.map((pet) => (
+                  <React.Fragment key={pet?._id}>
                     <PetCard pet={pet} />
                   </React.Fragment>
                 ))}
@@ -98,11 +98,11 @@ const PetListing = () => {
             ))}
       </div>
       {isFetchingNextPage && (
-        <p className='text-lg md:text-xl my-6 dark:text-white'>Loading more pets...</p>
+        <p className='text-lg md:text-xl my-6 dark:text-white text-center'>Loading more pets...</p>
       )}
       {!hasNextPage && (
         <p className='text-xl text-center md:text-2xl my-6 dark:text-white:'>
-          No More Pets Card to Show
+          No More Pets to Show
         </p>
       )}
       <div ref={ref}></div>

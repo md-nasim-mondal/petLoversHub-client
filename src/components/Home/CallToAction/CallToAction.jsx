@@ -77,7 +77,7 @@ const CallToAction = () => {
         </ul>
         <Link
           to='/pet-listing'
-          className='text-yellow-300 dark:text-white bg-gradient-to-r from-green-400 to-green-500 hover:bg-gradient-to-br font-semibold rounded-lg py-2 px-4 sm:py-3 sm:px-8 text-center inline-block transition duration-300 ease-in-out max-w-full'>
+          className='text-white bg-gradient-to-r from-green-400 to-green-500 hover:bg-gradient-to-br font-semibold rounded-lg py-2 px-4 sm:py-3 sm:px-8 text-center inline-block transition duration-300 ease-in-out max-w-full'>
           Start Your Journey
         </Link>
       </div>
