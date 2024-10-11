@@ -7,13 +7,13 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import MenuItem from "./Menu/MenuItem";
 import logo from "../../../assets/images/petLoversHubLogo.png";
-import ThemeToggle from "../../Shared/ThemeToggle/ThemeToggle";
 import useRole from "../../../hooks/useRole";
 import UserMenu from "./Menu/UserMenu";
 import AdminMenu from "./Menu/AdminMenu";
 import ToggleBtn from "../../Shared/Button/ToggleBtn";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import ThemeSwitcher from "../../Shared/SectionTitle/ThemeSwitcher";
 
 const Sidebar = () => {
   const { logOut, loading, isDrawerOpen, setDrawerOpen } = useAuth();
@@ -46,8 +46,8 @@ const Sidebar = () => {
 
   const handleLogout = () => {
     logOut();
-    navigate('/')
-  }
+    navigate("/");
+  };
 
   const isContentLoading = loading || isLoading;
 
@@ -73,7 +73,7 @@ const Sidebar = () => {
           className={`z-10 md:fixed flex flex-col justify-between overflow-y-auto overflow-x-hidden bg-gray-100 dark:bg-gray-600 w-80 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform  transition duration-200 ease-in-out`}>
           <div className=' absolute top-0 end-2.5 inline-flex'>
             <div className='mr-52 py-3'>
-              <ThemeToggle />
+              <ThemeSwitcher />
             </div>
             <div className='flex items-center'>
               <button
@@ -154,6 +154,5 @@ const Sidebar = () => {
     </div>
   );
 };
-
 
 export default Sidebar;

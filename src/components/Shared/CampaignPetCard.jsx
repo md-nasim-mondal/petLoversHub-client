@@ -31,7 +31,7 @@ const CampaignPetCard = ({ campaign }) => {
         <>
           <div className='p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
             <img
-              className='rounded-t-lg h-96 w-full'
+              className='rounded-t-lg h-[350px] w-full'
               src={campaign?.petImage}
               alt={campaign?.petName}
             />
