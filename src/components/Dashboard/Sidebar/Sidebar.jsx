@@ -71,8 +71,8 @@ const Sidebar = () => {
         aria-labelledby='drawer-navigation-label'>
         <div
           className={`z-10 md:fixed flex flex-col justify-between overflow-y-auto overflow-x-hidden bg-gray-100 dark:bg-gray-600 w-80 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform  transition duration-200 ease-in-out`}>
-          <div className=' absolute top-0 end-2.5 inline-flex'>
-            <div className='mr-52 py-3'>
+          <div className=' absolute top-0 flex justify-between w-[95%]'>
+            <div className='py-3'>
               <ThemeSwitcher />
             </div>
             <div className='flex items-center'>
