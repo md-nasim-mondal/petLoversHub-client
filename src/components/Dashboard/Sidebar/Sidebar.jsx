@@ -13,7 +13,7 @@ import AdminMenu from "./Menu/AdminMenu";
 import ToggleBtn from "../../Shared/Button/ToggleBtn";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import ThemeSwitcher from "../../Shared/SectionTitle/ThemeSwitcher";
+import ThemeSwitcher from "../../Shared/ThemeSwitcher/ThemeSwitcher";
 
 const Sidebar = () => {
   const { logOut, loading, isDrawerOpen, setDrawerOpen } = useAuth();

@@ -5,7 +5,7 @@ import avatarImg from "../../../assets/images/placeholder.jpg";
 import NavItem from "./NavItem";
 import toast from "react-hot-toast";
 import logo from "../../../assets/images/petLoversHubLogo.png";
-import ThemeSwitcher from "../SectionTitle/ThemeSwitcher";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 
 const Navbar = () => {
   const {
