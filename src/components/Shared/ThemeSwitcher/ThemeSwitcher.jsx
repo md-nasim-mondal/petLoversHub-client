@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
 
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState('default');
+  const [theme, setTheme] = useState(() => {
+    // Initialize theme from local storage or system preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme;
+    } else {
+      return 'default'; // Default system-based theme
+    }
+  });
 
-  // Apply theme based on the selected option
-  const applyTheme = (theme) => {
-    if (theme === 'dark') {
+  // Apply theme to the document
+  const applyTheme = (currentTheme) => {
+    if (currentTheme === 'dark') {
       document.documentElement.classList.add('dark');
       document.documentElement.setAttribute('data-theme', 'dark');
-    } else if (theme === 'light') {
+    } else if (currentTheme === 'light') {
       document.documentElement.classList.remove('dark');
       document.documentElement.setAttribute('data-theme', 'light');
     } else {
-      // Default case: match the device's system theme
+      // System-based theme
       const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       if (systemPrefersDark) {
         document.documentElement.classList.add('dark');
@@ -24,26 +32,20 @@ const ThemeSwitcher = () => {
     }
   };
 
-  // Handle theme toggle
+  // Handle theme change
   const handleThemeChange = (e) => {
-    const newTheme = e.target.value;
-    setTheme(newTheme);
-    applyTheme(newTheme);
+    const selectedTheme = e.target.value;
+    setTheme(selectedTheme);
   };
 
-  // Effect to set the initial theme based on saved preference or system settings
+  // Effect to apply theme on mount and whenever theme changes
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'default'; // Default to system preference
-    setTheme(savedTheme);
-    applyTheme(savedTheme);
-  }, []);
+    applyTheme(theme);
 
-  // Effect to save the theme to localStorage whenever it changes
-  useEffect(() => {
-    if (theme !== 'default') {
-      localStorage.setItem('theme', theme);
+    if (theme === 'default') {
+      localStorage.removeItem('theme'); // Don't store system-based preference
     } else {
-      localStorage.removeItem('theme'); // Don't store default to allow system preference changes
+      localStorage.setItem('theme', theme);
     }
   }, [theme]);
 
