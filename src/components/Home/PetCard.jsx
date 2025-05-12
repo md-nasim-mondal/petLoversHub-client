@@ -34,7 +34,7 @@ const PetCard = ({ pet }) => {
             ) : (
               <>
                 {pet?.petName} Age:{" "}
-                <span className='text-green-500'>{pet?.petAge} months</span>
+                <span className='text-green-500 ml-1'>{pet?.petAge} months</span>
               </>
             )}
           </p>
@@ -44,18 +44,18 @@ const PetCard = ({ pet }) => {
             ) : (
               <>
                 Category:{" "}
-                <span className='text-green-500'>{pet?.petCategory}</span>
+                <span className='text-green-500 ml-1'>{pet?.petCategory}</span>
               </>
             )}
           </p>
         </div>
         <div className='flex justify-between items-center flex-wrap gap-1 '>
-          <p className='text-teal-500 flex flex-wrap'>
+          <p className='text-black dark:text-white  flex flex-wrap'>
             {loading ? (
               <Skeleton width={100} />
             ) : (
               <>
-              Location: <span>{pet?.petLocation}</span>
+              Location: <span className="ml-2" > {pet?.petLocation}</span>
               </>
             )}
           </p>

@@ -52,6 +52,8 @@ const DonationCampaigns = () => {
     ));
   };
 
+  console.log(data);
+
   return (
     <>
       <Helmet>
@@ -68,14 +70,14 @@ const DonationCampaigns = () => {
               <React.Fragment key={pageIndex}>
                 {page.campaigns.map((campaign) => (
                   <React.Fragment key={campaign?._id}>
-                    <CampaignPetCard campaign={campaign}/>
+                    <CampaignPetCard campaign={campaign} />
                   </React.Fragment>
                 ))}
               </React.Fragment>
             ))}
       </div>
       {isFetchingNextPage && (
-        <p className='text-lg md:text-xl my-6'>Loading more campaigns...</p>
+        <p className='text-lg md:text-xl my-6 text-center'>Loading more campaigns...</p>
       )}
       {!hasNextPage && (
         <p className='text-xl text-center md:text-2xl my-6'>

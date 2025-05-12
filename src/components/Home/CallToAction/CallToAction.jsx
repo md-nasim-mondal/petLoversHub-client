@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css"; // Import the CSS for the skeleton
-import pic from "../../../assets/images/callToActionPetCard.jpg";
+import pic from "../../../assets/images/3810386.jpg";
 import useAuth from "../../../hooks/useAuth";
 
 const CallToAction = () => {
@@ -29,20 +29,20 @@ const CallToAction = () => {
 
   return (
     <section
-      className='relative min-h-96 bg-cover bg-center rounded-t-xl flex flex-col items-center justify-center text-center'
+      className='relative min-h-96 bg-contain bg-center rounded-t-xl flex flex-col items-center justify-center text-center'
       style={{ backgroundImage: `url(${pic})` }}>
       <div className='bg-black min-h-96 bg-opacity-70 dark:bg-gray-800 dark:bg-opacity-80 w-full h-full flex flex-col items-center justify-center text-center p-4 sm:p-8 rounded-t-xl'>
-        <h2 className='text-yellow-300 dark:text-blue-200 text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 leading-tight'>
+        <h2 className='text-gray-200 dark:text-blue-200 text-2xl sm:text-4xl font-bold mb-2 sm:mb-4 leading-tight'>
           Find Your Perfect Companion
         </h2>
-        <p className='text-yellow-200 dark:text-blue-100 text-lg lg:text-xl mb-4 sm:mb-6 font-semibold w-full md:w-[90%]'>
+        <p className='text-gray-200 dark:text-blue-100 text-lg lg:text-xl mb-4 sm:mb-6 font-semibold w-full md:w-[90%]'>
           At PetLoversHub, we believe every pet deserves a loving home. Whether
           you&apos;re looking for a playful puppy, a serene cat, or a gentle
           rabbit, your new best friend is waiting for you. Adopting a pet not
           only enriches your life but also saves theirs. Join us in making a
           difference today by opening your heart and home to a deserving animal.
         </p>
-        <ul className='text-yellow-200 dark:text-blue-100 text-left mb-4 sm:mb-6 font-medium  text-base lg:text-lg'>
+        <ul className='text-gray-200 dark:text-blue-100 text-left mb-4 sm:mb-6 font-medium  text-base lg:text-lg'>
           <li className='flex items-center mb-2'>
             <svg
               className='w-5 h-5 sm:w-6 sm:h-6 fill-current text-green-300 dark:text-green-200 mr-2'

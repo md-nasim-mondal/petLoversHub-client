@@ -118,7 +118,7 @@ const Contact = () => {
             className='textarea textarea-bordered textarea-lg w-full'></textarea>
           <button
             onClick={handleSendButton}
-            className='w-[40%] bg-[#23BE0A] text-[#FFFFFF] rounded-md py-2'>
+            className='w-[40%] bg-blue-600 text-[#FFFFFF] rounded-md py-2'>
             Send
           </button>
         </div>

@@ -17,6 +17,7 @@ const PetDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
+
   const { data: pet = {}, isLoading: isPetLoading } = useQuery({
     queryKey: ["pet", id],
     enabled: !!id,
@@ -27,6 +28,7 @@ const PetDetails = () => {
       }
     },
   });
+
   const formattedDate = pet?.createdAt
     ? format(new Date(pet.createdAt), "MMMM dd, yyyy")
     : "";
@@ -55,9 +57,10 @@ const PetDetails = () => {
     const form = e.target;
     const mobileNumber = form.mobileNumber.value;
     const location = form.location.value;
-    const petData = Object.assign({}, pet);
+    const petData = { ...pet };
     delete petData._id;
     delete petData.createdAt;
+
     const adoptingData = {
       petId: pet?._id,
       ...petData,
@@ -66,8 +69,8 @@ const PetDetails = () => {
         name: user?.displayName,
         email: user?.email,
         photo: user?.photoURL,
-        mobileNumber: mobileNumber,
-        location: location,
+        mobileNumber,
+        location,
       },
       requestedAt: new Date().toISOString(),
     };
@@ -87,42 +90,47 @@ const PetDetails = () => {
       <Helmet>
         <title>PetLoversHub || Pet-Details</title>
       </Helmet>
+
       {isPetLoading || loading ? (
         <Skeleton height={40} width={300} className='my-6 md:my-12' />
       ) : (
         <h3 className='mt-6 text-xl md:text-3xl lg:text-4xl font-bold text-center dark:text-white'>
-          Details Page of {pet?.petName}{" "}
+          Details Page of {pet?.petName}
         </h3>
       )}
-      <div className='flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow-lg md:flex-row md:max-w-4xl hover:bg-purple-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-300 mx-auto my-12 md:my-24'>
+
+      <div className='flex flex-col md:flex-row md:max-w-4xl w-full items-stretch bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-purple-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-300 mx-auto my-12 md:my-24'>
         {isPetLoading || loading ? (
           <Skeleton
             width={400}
             height={400}
-            className='rounded-t-lg md:rounded-none md:rounded-l-lg'
+            className='rounded-t-lg md:rounded-none md:rounded-l-lg h-full object-cover'
           />
         ) : (
-          <img
-            className='object-cover w-full rounded-t-lg h-96 md:h-auto md:w-96 md:rounded-none md:rounded-l-lg shadow-md'
-            src={pet?.petImage}
-            alt={pet?.petName}
-          />
+          <div className='w-full md:w-[80%] h-auto '>
+            <img
+              className='object-cover w-full h-full rounded-t-lg md:rounded-none md:rounded-l-lg shadow-md'
+              src={pet?.petImage}
+              alt={pet?.petName}
+            />
+          </div>
         )}
-        <div className='flex flex-col justify-between p-6 leading-normal space-y-4'>
+
+        <div className='flex flex-col justify-between p-6 leading-normal space-y-4 w-full'>
           {isPetLoading ? (
             <Skeleton count={10} />
           ) : (
             <>
               <div>
-                <h5 className='text-3xl font-bold tracking-tight text-lime-400 dark:text-purple-300'>
+                <h5 className='text-3xl font-bold tracking-tight text-purple-600 dark:text-white'>
                   Pet Name: {pet?.petName}
                 </h5>
-                <h3 className='text-lg font-semibold text-teal-800 dark:text-teal-300'>
+                <h3 className='text-lg font-semibold dark:text-white'>
                   Pet Age: {pet?.petAge} months
                 </h3>
               </div>
-              <div className='flex justify-between items-center'>
-                <h3 className='text-lg font-semibold text-pink-800 dark:text-pink-300'>
+              <div className='flex justify-between items-center gap-2 dark:text-white'>
+                <h3 className='text-lg font-semibold'>
                   Pet Category: {pet?.petCategory}
                 </h3>
                 <h3 className='text-lg font-semibold text-blue-800 dark:text-blue-300'>
