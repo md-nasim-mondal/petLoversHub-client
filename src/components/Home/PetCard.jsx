@@ -18,7 +18,7 @@ const PetCard = ({ pet }) => {
           alt={pet?.petName}
         />
       )}
-      <div className="p-4 md:p-0">
+      <div className='p-4 md:p-0'>
         <h4 className='mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
           Name:{" "}
           {loading ? (
@@ -34,7 +34,9 @@ const PetCard = ({ pet }) => {
             ) : (
               <>
                 {pet?.petName} Age:{" "}
-                <span className='text-green-500 ml-1'>{pet?.petAge} months</span>
+                <span className='text-green-500 ml-1'>
+                  {pet?.petAge} months
+                </span>
               </>
             )}
           </p>
@@ -55,7 +57,7 @@ const PetCard = ({ pet }) => {
               <Skeleton width={100} />
             ) : (
               <>
-              Location: <span className="ml-2" > {pet?.petLocation}</span>
+                Location: <span className='ml-2'> {pet?.petLocation}</span>
               </>
             )}
           </p>
