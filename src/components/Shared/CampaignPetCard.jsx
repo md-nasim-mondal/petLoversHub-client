@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import useAuth from "../../hooks/useAuth";
@@ -53,10 +53,10 @@ const CampaignPetCard = ({ campaign }) => {
                 {campaign?.donatedAmount} $
               </span>
             </p>
-            <h3 className='dark:text-white'>
+            {/* <h3 className='dark:text-white'>
               <span>PostedAt:</span>{" "}
               {format(new Date(campaign?.createdAt), "MMMM dd, yyyy")}
-            </h3>
+            </h3> */}
             <div className="mt-4">
               <Link
                 to={`/campaign-details/${campaign?._id}`}
