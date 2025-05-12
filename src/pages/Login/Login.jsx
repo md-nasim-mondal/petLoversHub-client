@@ -13,7 +13,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state || "/";
+  const from = location.state?.from?.pathname || "/";
   const { signIn, signInWithGoogle, signInWithGitHub, resetPassword } =
     useAuth();
   const [email, setEmail] = useState("");
@@ -77,7 +77,7 @@ const Login = () => {
     try {
       setIsLoading(true);
       await signInWithGitHub();
-      navigate(from);
+      navigate(from, { replace: true });
       toast.success("LogIn Successful With Github!!");
       setIsLoading(false);
     } catch (err) {

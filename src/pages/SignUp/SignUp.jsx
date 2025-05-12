@@ -13,7 +13,7 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location?.state || "/";
+  const from = location.state?.from?.pathname || "/";
   const {
     createUser,
     signInWithGoogle,
@@ -71,7 +71,7 @@ const SignUp = () => {
     try {
       setIsLoading(true);
       await signInWithGoogle();
-      navigate(from);
+      navigate(from, { replace: true });
       toast.success("LogIn Successful With Google");
       setLoading(false);
       setIsLoading(false);
