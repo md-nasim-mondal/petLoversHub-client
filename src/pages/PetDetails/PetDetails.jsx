@@ -42,7 +42,7 @@ const PetDetails = () => {
       return data;
     },
     onSuccess: () => {
-      toast.success("Pet Added Successfully");
+      toast.success("Pet adopted request send successfully!");
       navigate("/pet-listing");
       setIsLoading(false);
     },
