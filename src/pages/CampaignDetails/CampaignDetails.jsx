@@ -2,7 +2,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 import { useParams } from "react-router-dom";
 import DonateModal from "../../components/Modal/DonateModal";
 import Skeleton from "react-loading-skeleton";
@@ -31,9 +31,9 @@ const CampaignDetails = () => {
       }
     },
   });
-  const formattedDate = campaign?.createdAt
-    ? format(new Date(campaign.createdAt), "MMMM dd, yyyy")
-    : "";
+  // const formattedDate = campaign?.createdAt
+  //   ? format(new Date(campaign.createdAt), "MMMM dd, yyyy")
+  //   : "";
 
   const closeModal = () => {
     setIsDonateModalOpen(false);
@@ -119,14 +119,14 @@ const CampaignDetails = () => {
                 <br />
                 {campaign?.longDescription}
               </p>
-              <div className='flex flex-wrap justify-between items-center gap-8'>
+              {/* <div className='flex flex-wrap justify-between items-center gap-8'>
                 <p className='text-lg font-semibold text-red-800 dark:text-red-300'>
                   Posted At: {formattedDate}
                 </p>
                 <p className='text-lg font-semibold text-yellow-800 dark:text-yellow-300'>
                   End Date: {campaign?.endDate}
                 </p>
-              </div>
+              </div> */}
               <button
                 onClick={() => handleDonateModal()}
                 className='px-6 py-2 mt-4 text-lg font-bold text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-all duration-300'>

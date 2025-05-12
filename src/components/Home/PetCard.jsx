@@ -13,7 +13,7 @@ const PetCard = ({ pet }) => {
         <Skeleton height={192} className='rounded-t-lg' />
       ) : (
         <img
-          className='rounded-t-lg min-w-full md:min-w-[300px] md:max-w-[340px] h-48 mx-auto'
+          className='rounded-t-lg min-w-full md:min-w-[300px] h-48 mx-auto'
           src={pet?.petImage}
           alt={pet?.petName}
         />
